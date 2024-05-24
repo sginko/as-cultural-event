@@ -1,5 +1,6 @@
-package com.example.cultural_event.account;
+package com.example.cultural_event.account.controller;
 
+import com.example.cultural_event.account.AccountRequestDto;
 import com.example.cultural_event.account.services.AccountService;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
