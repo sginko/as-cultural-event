@@ -1,12 +1,13 @@
 package com.example.cultural_event.account;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.cultural_event.account.services.AccountService;
+import lombok.NoArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/users")
+@RequestMapping("/api/v1/users")
+
 public class AccountController {
     private AccountService accountService;
 
@@ -15,7 +16,9 @@ public class AccountController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public void createNewAccount(@RequestBody AccountRequestDto accountRequestDto) {
+        accountService.addNewAccount(accountRequestDto);
 
     }
 
