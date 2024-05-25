@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-@Setter
 
 @Entity
 @Table(name = "events")
