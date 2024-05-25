@@ -28,7 +28,7 @@ public class EventEntity {
     @Size(min = 2, max = 50, message = "City name should be between 2 and 50 characters")
     private String city;
 
-    @NotNull(message = "Date and Time can not be null")
+    @NotNull(message = "The Date-Time field cannot be empty")
     private LocalDateTime dateTimeEvent;
 
     public EventEntity(String eventName, String city, LocalDateTime dateTimeEvent) {
