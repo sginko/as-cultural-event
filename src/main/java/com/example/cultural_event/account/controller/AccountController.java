@@ -20,7 +20,6 @@ public class AccountController {
     @ResponseStatus(HttpStatus.CREATED)
     public void createNewAccount(@RequestBody AccountRequestDto accountRequestDto) {
         accountService.addNewAccount(accountRequestDto);
-
     }
 
 }
