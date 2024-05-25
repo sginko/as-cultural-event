@@ -5,5 +5,5 @@ import org.springframework.stereotype.Service;
 
 
 public interface AccountService {
-    public void addNewAccount(AccountRequestDto accountRequestDto);
+    void addNewAccount(AccountRequestDto accountRequestDto);
 }
