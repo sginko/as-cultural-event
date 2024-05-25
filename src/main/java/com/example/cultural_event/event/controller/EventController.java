@@ -26,7 +26,13 @@ public class EventController {
 
     @ResponseStatus(HttpStatus.FOUND)
     @GetMapping
-    public List<EventResponseDto> findAllEvents(){
+    public List<EventResponseDto> findAllEvents() {
         return eventService.findAllEvents();
+    }
+
+    @ResponseStatus(HttpStatus.FOUND)
+    @GetMapping(params = "city")
+    public List<EventResponseDto> findAllEventsByCity(@RequestParam String city) {
+        return eventService.findAllEventsByCity(city);
     }
 }
