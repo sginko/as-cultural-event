@@ -1,8 +1,8 @@
-package com.example.cultural_event.service;
+package com.example.cultural_event.event.model.service;
 
-import com.example.cultural_event.model.dto.EventRequestDto;
-import com.example.cultural_event.model.mapper.EventMapper;
-import com.example.cultural_event.repository.EventRepository;
+import com.example.cultural_event.event.model.dto.EventRequestDto;
+import com.example.cultural_event.event.model.mapper.EventMapper;
+import com.example.cultural_event.event.model.repository.EventRepository;
 import org.springframework.stereotype.Service;
 
 @Service

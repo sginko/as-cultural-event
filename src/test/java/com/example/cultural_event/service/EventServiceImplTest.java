@@ -1,7 +1,8 @@
 package com.example.cultural_event.service;
 
-import com.example.cultural_event.model.dto.EventRequestDto;
-import com.example.cultural_event.repository.EventRepository;
+import com.example.cultural_event.event.model.dto.EventRequestDto;
+import com.example.cultural_event.event.model.repository.EventRepository;
+import com.example.cultural_event.event.model.service.EventService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class EventServiceImplTest {
@@ -27,11 +27,10 @@ class EventServiceImplTest {
 
     @Test
     void should_create_new_event() {
+        //given
         String eventName = "Test Event Name";
         String city = "City";
         LocalDateTime dateTimeEvent = LocalDateTime.now();
-
-        //given
         EventRequestDto eventRequestDto = new EventRequestDto(eventName, city, dateTimeEvent);
 
         //when
@@ -40,5 +39,6 @@ class EventServiceImplTest {
         //then
         assertThat(eventRequestDto).isNotNull();
         assertThat(eventRequestDto.getEventName()).isEqualTo("Test Event Name");
+        assertThat(eventRequestDto.getCity()).isEqualTo("City");
     }
 }

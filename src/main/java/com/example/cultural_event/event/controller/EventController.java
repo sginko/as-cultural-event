@@ -1,7 +1,7 @@
-package com.example.cultural_event.controller;
+package com.example.cultural_event.event.controller;
 
-import com.example.cultural_event.model.dto.EventRequestDto;
-import com.example.cultural_event.service.EventService;
+import com.example.cultural_event.event.model.dto.EventRequestDto;
+import com.example.cultural_event.event.model.service.EventService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +16,8 @@ public class EventController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void addEvent(@RequestBody EventRequestDto eventRequestDto) {
+    public EventRequestDto addEvent(@RequestBody EventRequestDto eventRequestDto) {
         eventService.addEvent(eventRequestDto);
+        return eventRequestDto;
     }
 }

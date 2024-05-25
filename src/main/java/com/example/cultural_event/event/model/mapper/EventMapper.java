@@ -1,8 +1,8 @@
-package com.example.cultural_event.model.mapper;
+package com.example.cultural_event.event.model.mapper;
 
-import com.example.cultural_event.model.dto.EventRequestDto;
-import com.example.cultural_event.model.dto.EventResponseDto;
-import com.example.cultural_event.model.enity.EventEntity;
+import com.example.cultural_event.event.model.dto.EventRequestDto;
+import com.example.cultural_event.event.model.dto.EventResponseDto;
+import com.example.cultural_event.event.model.enity.EventEntity;
 import org.springframework.stereotype.Component;
 
 @Component
