@@ -21,7 +21,6 @@ public class EventControllerAdvice {
                         .replace(",", "\n"));
     }
 
-
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<String> handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
         Throwable cause = e.getMostSpecificCause();
