@@ -1,18 +1,14 @@
 package com.example.cultural_event.event.model.enity;
 
-import com.example.cultural_event.account.AccountEntity;
-import com.example.cultural_event.notification.NotificationEntity;
 import jakarta.persistence.*;
-        import jakarta.validation.constraints.*;
-        import lombok.AccessLevel;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.hibernate.annotations.DialectOverride;
-import org.springframework.context.annotation.Conditional;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
