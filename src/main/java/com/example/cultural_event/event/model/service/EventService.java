@@ -7,5 +7,8 @@ import java.util.List;
 
 public interface EventService {
     void addEvent(EventRequestDto eventRequestDto);
+
     List<EventResponseDto> findAllEvents();
+
+    List<EventResponseDto> findAllEventsByCity(String city);
 }

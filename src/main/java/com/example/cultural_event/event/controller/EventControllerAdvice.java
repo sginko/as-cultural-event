@@ -1,5 +1,6 @@
 package com.example.cultural_event.event.controller;
 
+import com.example.cultural_event.event.model.service.EventException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,8 +14,14 @@ import java.util.stream.Collectors;
 @ControllerAdvice
 public class EventControllerAdvice {
 
+    @ExceptionHandler(EventException.class)
+    public ResponseEntity handleEventException(EventException e) {
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
+                .body(e.getMessage());
+    }
+
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity handleEventException(ConstraintViolationException e){
+    public ResponseEntity handleEventException(ConstraintViolationException e) {
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
                 .body(e.getConstraintViolations().stream()
                         .map(error -> error.getMessageTemplate()).collect(Collectors.joining(",", "", ""))

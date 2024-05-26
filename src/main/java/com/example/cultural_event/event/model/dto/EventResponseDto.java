@@ -3,9 +3,9 @@ package com.example.cultural_event.event.model.dto;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 public class EventResponseDto {
