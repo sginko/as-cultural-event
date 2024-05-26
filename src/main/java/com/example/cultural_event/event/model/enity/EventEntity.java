@@ -31,7 +31,6 @@ public class EventEntity {
 
     @NotNull(message = "The Date-Time field cannot be empty")
     private LocalDateTime dateTimeEvent;
-
     public EventEntity(String eventName, String city, LocalDateTime dateTimeEvent) {
         this.eventName = eventName;
         this.city = city;
