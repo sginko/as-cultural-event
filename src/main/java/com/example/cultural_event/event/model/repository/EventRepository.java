@@ -5,9 +5,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public interface EventRepository extends JpaRepository<EventEntity, Long> {
 
     @Query("SELECT e FROM EventEntity e WHERE LOWER(e.city) = LOWER(:city)")
     List<EventEntity> findAllEventsByCity(String city);
+
+    Optional<EventEntity> findByEventId(UUID eventId);
+
+    void deleteByEventId(UUID eventId);
 }

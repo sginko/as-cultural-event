@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class EventMapper {
 
     public EventResponseDto fromEntity(EventEntity eventEntity) {
-        return new EventResponseDto(eventEntity.getEventName(), eventEntity.getCity(), eventEntity.getDateTimeEvent());
+        return new EventResponseDto(eventEntity.getEventId(), eventEntity.getEventName(), eventEntity.getCity(), eventEntity.getDateTimeEvent());
     }
 
     public EventEntity toEntity(EventRequestDto eventRequestDto) {

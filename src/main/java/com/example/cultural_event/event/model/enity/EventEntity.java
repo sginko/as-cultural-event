@@ -7,12 +7,14 @@ import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
-
+@Setter
 @Entity
 @Table(name = "events")
 public class EventEntity {
@@ -20,6 +22,9 @@ public class EventEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Column(nullable = false, updatable = false, unique = true)
+    private UUID eventId;
 
     @NotBlank
     @Size(min = 3, max = 50, message = "Event name should be between 3 and 50 characters")
@@ -33,6 +38,7 @@ public class EventEntity {
     private LocalDateTime dateTimeEvent;
 
     public EventEntity(String eventName, String city, LocalDateTime dateTimeEvent) {
+        this.eventId = UUID.randomUUID();
         this.eventName = eventName;
         this.city = city;
         this.dateTimeEvent = dateTimeEvent;

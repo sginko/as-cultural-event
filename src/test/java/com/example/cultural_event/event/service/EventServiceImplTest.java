@@ -1,7 +1,9 @@
-package com.example.cultural_event.service;
+package com.example.cultural_event.event.service;
 
 import com.example.cultural_event.event.model.dto.EventRequestDto;
 import com.example.cultural_event.event.model.dto.EventResponseDto;
+import com.example.cultural_event.event.model.enity.EventEntity;
+import com.example.cultural_event.event.model.mapper.EventMapper;
 import com.example.cultural_event.event.model.repository.EventRepository;
 import com.example.cultural_event.event.model.service.EventException;
 import com.example.cultural_event.event.model.service.EventService;
@@ -13,6 +15,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -24,6 +28,9 @@ class EventServiceImplTest {
 
     @Autowired
     private EventService eventService;
+
+    @Autowired
+    private EventMapper eventMapper;
 
     @AfterEach
     void tearDown() {
@@ -68,7 +75,6 @@ class EventServiceImplTest {
     void should_throw_exception_when_no_events_found() {
         // given
 
-
         // when
         Executable executable = () -> eventService.findAllEvents();
 
@@ -107,5 +113,69 @@ class EventServiceImplTest {
 
         // then
         assertThrows(EventException.class, executable, "Cannot find events for city: " + incorrectCity);
+    }
+
+    @Test
+    void should_delete_event_by_eventId() {
+        //given
+        String eventName = "Test Event Name";
+        String city = "City";
+        LocalDateTime dateTimeEvent = LocalDateTime.now();
+
+        EventRequestDto eventRequestDto = new EventRequestDto(eventName, city, dateTimeEvent);
+        eventService.addEvent(eventRequestDto);
+        List<EventResponseDto> allEvents = eventService.findAllEvents();
+        UUID eventId = allEvents.get(0).getEventId();
+
+        //when
+        eventService.deleteByEventId(eventId);
+
+        //then
+        assertThat(eventRepository.findAll().isEmpty()).isTrue();
+    }
+
+    @Test
+    void should_throw_exception_when_no_events_found_for_eventId() {
+        //given
+        UUID incorrectEventId = UUID.randomUUID();
+        String eventName = "Test Event Name";
+        String city = "City";
+        LocalDateTime dateTimeEvent = LocalDateTime.now();
+
+        EventRequestDto eventRequestDto = new EventRequestDto(eventName, city, dateTimeEvent);
+        eventService.addEvent(eventRequestDto);
+        List<EventResponseDto> allEvents = eventService.findAllEvents();
+        UUID eventId = allEvents.get(0).getEventId();
+        eventService.deleteByEventId(eventId);
+
+        //when
+        Executable e = () -> eventService.deleteByEventId(incorrectEventId);
+
+        //then
+        assertThat(eventRepository.findAll().isEmpty()).isTrue();
+    }
+
+    @Test
+    void should_update_event() {
+        //given
+        String eventName = "Test Event Name";
+        String newEventName = "New Event Name";
+        String city = "City";
+        LocalDateTime dateTimeEvent = LocalDateTime.now();
+
+        EventRequestDto eventRequestDto = new EventRequestDto(eventName, city, dateTimeEvent);
+        eventService.addEvent(eventRequestDto);
+        List<EventResponseDto> allEvents = eventService.findAllEvents();
+        UUID eventId = allEvents.get(0).getEventId();
+
+        EventRequestDto updatedEventRequestDto = new EventRequestDto(newEventName, city, dateTimeEvent);
+
+        //when
+        eventService.updateEvent(eventId, updatedEventRequestDto);
+        //and
+        Optional<EventEntity> byEventId = eventRepository.findByEventId(eventId);
+
+        //then
+        assertThat(byEventId.get().getEventName()).isEqualTo(newEventName);
     }
 }
