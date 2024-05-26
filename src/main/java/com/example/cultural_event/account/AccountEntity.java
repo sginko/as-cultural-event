@@ -4,12 +4,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
+@Table(name = "accounts")
 public class AccountEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,5 +38,9 @@ public class AccountEntity {
         if (name.trim().length() == 0) {
             throw new AccountException("Name can not be empty!");
         }
+    }
+
+    public void receiveNotification(String eventName) {
+        System.out.println("Notification for account " + name + ": Event " + eventName + " has been created. In work...");
     }
 }
