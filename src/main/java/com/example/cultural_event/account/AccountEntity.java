@@ -5,6 +5,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Entity
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
@@ -17,6 +19,7 @@ public class AccountEntity {
     private String name;
     private String city;
     private String email;
+    private UUID technicalId;
 
     public AccountEntity(String name, String city, String email) {
         validateName(name);
@@ -24,6 +27,7 @@ public class AccountEntity {
         this.name = name;
         this.city = city;
         this.email = email;
+        this.technicalId = UUID.randomUUID();
     }
 
     private void validateEmail(String email) {

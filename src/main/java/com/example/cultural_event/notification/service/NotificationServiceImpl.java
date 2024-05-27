@@ -4,6 +4,7 @@ import com.example.cultural_event.account.AccountEntity;
 import com.example.cultural_event.account.AccountReader;
 import com.example.cultural_event.event.model.enity.EventEntity;
 import com.example.cultural_event.notification.NotificationEntity;
+import com.example.cultural_event.notification.NotificationReader;
 import com.example.cultural_event.notification.NotificationRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ public class NotificationServiceImpl implements NotificationService, NotifyListe
     private final AccountReader accountReader;
     private final NotificationRepository notificationRepository;
 
+
     public NotificationServiceImpl(AccountReader accountReader, NotificationRepository notificationRepository) {
         this.accountReader = accountReader;
         this.notificationRepository = notificationRepository;
@@ -25,6 +27,7 @@ public class NotificationServiceImpl implements NotificationService, NotifyListe
         sendNotifications(event, accounts);
     }
 
+    @Override
     @Transactional
     public void sendNotifications(EventEntity event, List<AccountEntity> accounts) {
         for (AccountEntity account : accounts) {
