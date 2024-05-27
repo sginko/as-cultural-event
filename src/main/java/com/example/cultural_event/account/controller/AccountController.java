@@ -26,7 +26,7 @@ public class AccountController {
         accountService.addNewAccount(accountRequestDto);
     }
 
-    @GetMapping("/users/{user_id}/notifications")
+    @GetMapping("/{user_id}/notifications")
     public List<NotificationEntity> findAllNotificationsForAccount(@PathVariable("user_id") UUID technicalId) {
         return accountService.findAllNotifications(technicalId);
     }
