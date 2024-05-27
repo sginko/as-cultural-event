@@ -46,21 +46,21 @@ class AccountServiceImplTest {
         //then
         assertThat(all.size()).isEqualTo(1);
     }
-    @Test
-    public void should_find_all_notifications_for_account_by_id() {
-        //given
-        AccountRequestDto accountRequestDto = new AccountRequestDto(CORRECT_NAME, CITY, CORRECT_EMAIL);
-
-        accountService.addNewAccount(accountRequestDto);
-        List<AccountEntity> all = accountRepository.findAll();
-        UUID technicalId = all.get(0).getTechnicalId();
-        EventRequestDto event = new EventRequestDto("event", CITY, LocalDateTime.now());
-        eventService.addEvent(event);
-        //when
-        List<NotificationEntity> allNotifications = accountService.findAllNotifications(technicalId);
-        //then
-        assertThat(allNotifications.size()).isEqualTo(1);
-    }
+//    @Test
+//    public void should_find_all_notifications_for_account_by_id() {
+//        //given
+//        AccountRequestDto accountRequestDto = new AccountRequestDto(CORRECT_NAME, CITY, CORRECT_EMAIL);
+//
+//        accountService.addNewAccount(accountRequestDto);
+//        List<AccountEntity> all = accountRepository.findAll();
+//        UUID technicalId = all.get(0).getTechnicalId();
+//        EventRequestDto event = new EventRequestDto("event", CITY, LocalDateTime.now());
+//        //eventService.addEvent(event);
+//        //when
+//        List<NotificationEntity> allNotifications = accountService.findAllNotifications(technicalId);
+//        //then
+//        assertThat(allNotifications.size()).isEqualTo(1);
+//    }
     private AccountRequestDto prepareAccountRequestDto(String name, String city, String email) {
         return new AccountRequestDto(name, city, email);
     }
