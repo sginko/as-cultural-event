@@ -1,7 +1,7 @@
 package com.example.cultural_event.account.services;
 
-import com.example.cultural_event.account.AccountEntity;
-import com.example.cultural_event.account.AccountRepository;
+import com.example.cultural_event.account.entity.AccountEntity;
+import com.example.cultural_event.account.repository.AccountRepository;
 import com.example.cultural_event.account.dto.AccountRequestDto;
 import com.example.cultural_event.event.model.dto.EventRequestDto;
 import com.example.cultural_event.event.model.repository.EventRepository;

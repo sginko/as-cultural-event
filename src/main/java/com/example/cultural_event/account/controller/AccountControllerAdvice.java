@@ -1,8 +1,6 @@
 package com.example.cultural_event.account.controller;
 
-import com.example.cultural_event.account.AccountException;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import com.example.cultural_event.account.service.AccountException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

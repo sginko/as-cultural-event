@@ -1,9 +1,9 @@
 package com.example.cultural_event.account.services;
 
 import com.example.cultural_event.account.AccountMapper;
-import com.example.cultural_event.account.AccountReader;
-import com.example.cultural_event.account.AccountEntity;
-import com.example.cultural_event.account.AccountRepository;
+import com.example.cultural_event.account.repository.AccountReader;
+import com.example.cultural_event.account.entity.AccountEntity;
+import com.example.cultural_event.account.repository.AccountRepository;
 import com.example.cultural_event.account.dto.AccountRequestDto;
 import com.example.cultural_event.notification.NotificationMapper;
 import com.example.cultural_event.notification.repository.NotificationReaderRepository;

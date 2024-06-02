@@ -1,9 +1,9 @@
 package com.example.cultural_event.account;
 
+import com.example.cultural_event.account.entity.AccountEntity;
+import com.example.cultural_event.account.service.AccountException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;

@@ -1,8 +1,10 @@
 package com.example.cultural_event.event.controller;
 
+import com.example.cultural_event.account.dto.AccountRequestDto;
 import com.example.cultural_event.event.model.dto.EventRequestDto;
 import com.example.cultural_event.event.model.dto.EventResponseDto;
 import com.example.cultural_event.event.model.service.EventService;
+import com.example.cultural_event.subscription.service.SubscriptionServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,9 +15,11 @@ import java.util.UUID;
 @RequestMapping("api/v1/events")
 public class EventController {
     private final EventService eventService;
+    private final SubscriptionServiceImpl subscriptionService;
 
-    public EventController(EventService eventService) {
+    public EventController(EventService eventService, SubscriptionServiceImpl subscriptionService) {
         this.eventService = eventService;
+        this.subscriptionService = subscriptionService;
     }
 
     @ResponseStatus(HttpStatus.CREATED)
@@ -42,8 +46,14 @@ public class EventController {
         eventService.deleteByEventId(eventId);
     }
 
-    @PutMapping("/update/{event_id}")
+    @PatchMapping("/update/{event_id}")
     public void updateByEventId(@PathVariable("event_id") UUID eventId, @RequestBody EventRequestDto eventRequestDto) {
         eventService.updateEvent(eventId, eventRequestDto);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/{event_id}/subscribe")
+    public void addSubscription(@PathVariable("event_id") UUID eventId, @RequestBody UUID accountId){
+        subscriptionService.addSubscriptionForEvent(eventId, accountId);
     }
 }
