@@ -1,11 +1,11 @@
-package com.example.cultural_event.account.services;
+package com.example.cultural_event.account.service;
 
-import com.example.cultural_event.account.AccountReader;
-import com.example.cultural_event.account.AccountEntity;
-import com.example.cultural_event.account.AccountRepository;
-import com.example.cultural_event.account.AccountRequestDto;
-import com.example.cultural_event.notification.NotificationEntity;
-import com.example.cultural_event.notification.NotificationReader;
+import com.example.cultural_event.account.repository.AccountReader;
+import com.example.cultural_event.account.entity.AccountEntity;
+import com.example.cultural_event.account.repository.AccountRepository;
+import com.example.cultural_event.account.dto.AccountRequestDto;
+import com.example.cultural_event.notification.enity.NotificationEntity;
+import com.example.cultural_event.notification.repository.NotificationReader;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

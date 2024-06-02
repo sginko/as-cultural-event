@@ -1,5 +1,6 @@
-package com.example.cultural_event.account;
+package com.example.cultural_event.account.entity;
 
+import com.example.cultural_event.account.service.AccountException;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

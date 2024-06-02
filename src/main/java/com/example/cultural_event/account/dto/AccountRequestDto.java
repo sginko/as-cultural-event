@@ -1,11 +1,9 @@
-package com.example.cultural_event.account;
+package com.example.cultural_event.account.dto;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.UUID;
 
 @Getter
 @AllArgsConstructor
