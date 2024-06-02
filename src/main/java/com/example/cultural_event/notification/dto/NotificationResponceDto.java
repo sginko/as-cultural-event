@@ -1,9 +1,7 @@
 package com.example.cultural_event.notification.dto;
 
-import com.example.cultural_event.account.AccountEntity;
+import com.example.cultural_event.account.entity.AccountEntity;
 import com.example.cultural_event.event.model.enity.EventEntity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

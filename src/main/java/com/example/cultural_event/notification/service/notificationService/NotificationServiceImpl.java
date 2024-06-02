@@ -1,4 +1,4 @@
-package com.example.cultural_event.notification.service;
+package com.example.cultural_event.notification.service.notificationService;
 
 import com.example.cultural_event.account.entity.AccountEntity;
 import com.example.cultural_event.account.repository.AccountReader;

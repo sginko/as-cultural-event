@@ -1,4 +1,4 @@
-package com.example.cultural_event.account.services;
+package com.example.cultural_event.account.service;
 
 import com.example.cultural_event.account.entity.AccountEntity;
 import com.example.cultural_event.account.repository.AccountRepository;

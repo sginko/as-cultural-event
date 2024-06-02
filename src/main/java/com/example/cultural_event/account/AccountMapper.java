@@ -1,6 +1,7 @@
 package com.example.cultural_event.account;
 
 import com.example.cultural_event.account.dto.AccountRequestDto;
+import com.example.cultural_event.account.entity.AccountEntity;
 import org.springframework.stereotype.Component;
 
 @Component

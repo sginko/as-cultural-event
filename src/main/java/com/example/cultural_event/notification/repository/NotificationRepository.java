@@ -1,4 +1,4 @@
-package com.example.cultural_event.notification;
+package com.example.cultural_event.notification.repository;
 
 import com.example.cultural_event.notification.enity.NotificationEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,10 +1,8 @@
 package com.example.cultural_event.account.controller;
 
 import com.example.cultural_event.account.dto.AccountRequestDto;
-import com.example.cultural_event.notification.NotificationEntity;
-import com.example.cultural_event.notification.dto.NotificationResponceDto;
 import com.example.cultural_event.account.service.AccountService;
-import com.example.cultural_event.notification.enity.NotificationEntity;
+import com.example.cultural_event.notification.dto.NotificationResponceDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

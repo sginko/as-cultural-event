@@ -1,6 +1,7 @@
 package com.example.cultural_event.notification;
 
 import com.example.cultural_event.notification.dto.NotificationResponceDto;
+import com.example.cultural_event.notification.enity.NotificationEntity;
 import org.springframework.stereotype.Component;
 
 @Component
