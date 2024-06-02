@@ -1,4 +1,4 @@
-package com.example.cultural_event.account.service;
+package com.example.cultural_event.account.services;
 
 import com.example.cultural_event.account.entity.AccountEntity;
 import com.example.cultural_event.account.repository.AccountRepository;
@@ -6,8 +6,8 @@ import com.example.cultural_event.account.dto.AccountRequestDto;
 import com.example.cultural_event.event.model.dto.EventRequestDto;
 import com.example.cultural_event.event.model.repository.EventRepository;
 import com.example.cultural_event.event.model.service.EventService;
-import com.example.cultural_event.notification.enity.NotificationEntity;
 import com.example.cultural_event.notification.repository.NotificationRepository;
+import com.example.cultural_event.notification.dto.NotificationResponceDto;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +63,7 @@ class AccountServiceImplTest {
         EventRequestDto event = new EventRequestDto("event", CITY, LocalDateTime.now());
         eventService.addEvent(event);
         //when
-        List<NotificationEntity> allNotifications = accountService.findAllNotifications(technicalId);
+        List<NotificationResponceDto> allNotifications = accountService.findAllNotifications(technicalId);
         //then
         assertThat(allNotifications.size()).isEqualTo(1);
     }
