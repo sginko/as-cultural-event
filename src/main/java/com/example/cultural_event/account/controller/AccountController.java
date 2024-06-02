@@ -1,9 +1,9 @@
 package com.example.cultural_event.account.controller;
 
-import com.example.cultural_event.account.AccountRequestDto;
+import com.example.cultural_event.account.dto.AccountRequestDto;
 import com.example.cultural_event.account.services.AccountService;
 import com.example.cultural_event.notification.NotificationEntity;
-import lombok.NoArgsConstructor;
+import com.example.cultural_event.notification.dto.NotificationResponceDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +27,7 @@ public class AccountController {
     }
 
     @GetMapping("/{user_id}/notifications")
-    public List<NotificationEntity> findAllNotificationsForAccount(@PathVariable("user_id") UUID technicalId) {
+    public List<NotificationResponceDto> findAllNotificationsForAccount(@PathVariable("user_id") UUID technicalId) {
         return accountService.findAllNotifications(technicalId);
     }
 

@@ -1,11 +1,15 @@
 package com.example.cultural_event.account.services;
 
+import com.example.cultural_event.account.AccountMapper;
 import com.example.cultural_event.account.AccountReader;
 import com.example.cultural_event.account.AccountEntity;
 import com.example.cultural_event.account.AccountRepository;
-import com.example.cultural_event.account.AccountRequestDto;
-import com.example.cultural_event.notification.NotificationEntity;
-import com.example.cultural_event.notification.NotificationReader;
+import com.example.cultural_event.account.dto.AccountRequestDto;
+import com.example.cultural_event.notification.NotificationMapper;
+import com.example.cultural_event.notification.repository.NotificationReaderRepository;
+import com.example.cultural_event.notification.dto.NotificationResponceDto;
+import com.example.cultural_event.notification.service.notificationReaderService.NotificationReaderService;
+import com.example.cultural_event.notification.service.notificationService.NotificationServiceImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,23 +19,27 @@ import java.util.UUID;
 public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
     private final AccountReader accountReader;
-    private final NotificationReader notificationReader;
+    //private final NotificationReader notificationReader;
+    private final NotificationReaderService notificationReaderService;
+    private final AccountMapper accountMapper;
+    private final NotificationMapper notificationMapper;
 
-    public AccountServiceImpl(AccountRepository accountRepository, AccountReader accountReader, NotificationReader notificationReader) {
+    public AccountServiceImpl(AccountRepository accountRepository, AccountReader accountReader, NotificationReaderService notificationReaderService, AccountMapper accountMapper, NotificationMapper notificationMapper) {
         this.accountRepository = accountRepository;
         this.accountReader = accountReader;
-        this.notificationReader = notificationReader;
+        this.notificationReaderService = notificationReaderService;
+        this.accountMapper = accountMapper;
+        this.notificationMapper = notificationMapper;
     }
 
     @Override
     public void addNewAccount(AccountRequestDto accountRequestDto) {
-        accountRepository.save(new AccountEntity(accountRequestDto.getName(),
-                accountRequestDto.getCity(), accountRequestDto.getEmail()));
+        accountRepository.save(accountMapper.toEntity(accountRequestDto));
     }
 
     @Override
-    public List<NotificationEntity> findAllNotifications(UUID technicalId) {
-        AccountEntity account = accountRepository.findByTechnicalId(technicalId);
-        return notificationReader.getAllNotificationsForAccount(account);
+    public List<NotificationResponceDto> findAllNotifications(UUID technicalId) {
+        List<NotificationResponceDto> allNotifications = notificationReaderService.findAllNotifications(technicalId);
+        return allNotifications;
     }
 }

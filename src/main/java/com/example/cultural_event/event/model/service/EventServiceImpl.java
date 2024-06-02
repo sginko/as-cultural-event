@@ -1,8 +1,9 @@
 package com.example.cultural_event.event.model.service;
 
-import com.example.cultural_event.notification.service.NotifyListener;
-import com.example.cultural_event.event.model.dto.EventRequestDto;
 import com.example.cultural_event.event.model.dto.EventResponseDto;
+import com.example.cultural_event.notification.service.notificationService.NotifyListener;
+import com.example.cultural_event.event.model.dto.EventRequestDto;
+
 import com.example.cultural_event.event.model.enity.EventEntity;
 import com.example.cultural_event.event.model.mapper.EventMapper;
 import com.example.cultural_event.event.model.repository.EventRepository;

@@ -1,4 +1,4 @@
-package com.example.cultural_event.account;
+package com.example.cultural_event.account.dto;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

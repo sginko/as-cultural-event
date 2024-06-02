@@ -1,11 +1,10 @@
-package com.example.cultural_event.notification.service;
+package com.example.cultural_event.notification.service.notificationService;
 
 import com.example.cultural_event.account.AccountEntity;
 import com.example.cultural_event.account.AccountReader;
 import com.example.cultural_event.event.model.enity.EventEntity;
 import com.example.cultural_event.notification.NotificationEntity;
-import com.example.cultural_event.notification.NotificationReader;
-import com.example.cultural_event.notification.NotificationRepository;
+import com.example.cultural_event.notification.repository.NotificationRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
