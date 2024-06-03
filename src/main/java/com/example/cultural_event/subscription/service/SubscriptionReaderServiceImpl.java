@@ -19,4 +19,9 @@ public class SubscriptionReaderServiceImpl implements SubscriptionReaderService{
     public List<SubscriptionEntity> findByEvent(EventEntity event) {
         return subscriptionReaderRepository.findByEvents(event);
     }
+
+    @Override
+    public void deleteAll(List<SubscriptionEntity> byEvent) {
+        subscriptionReaderRepository.deleteAll(byEvent);
+    }
 }

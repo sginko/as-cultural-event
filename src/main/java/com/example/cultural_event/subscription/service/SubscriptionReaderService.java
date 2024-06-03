@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface SubscriptionReaderService {
     List<SubscriptionEntity> findByEvent(EventEntity event);
+
+    void deleteAll(List<SubscriptionEntity> byEvent);
 }
