@@ -11,13 +11,13 @@ import org.springframework.stereotype.Component;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class NotificationResponceDto {
-    private EventEntity events;
-    private AccountEntity account;
+//    private EventEntity events;
+//    private AccountEntity account;
     private String notification;
+    private String city;
 
-    public NotificationResponceDto(EventEntity events, AccountEntity account, String notification) {
-        this.events = events;
-        this.account = account;
+    public NotificationResponceDto(String notification, String city) {
         this.notification = notification;
+        this.city = city;
     }
 }

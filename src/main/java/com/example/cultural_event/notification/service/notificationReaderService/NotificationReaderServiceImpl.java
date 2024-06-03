@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class NotificationReaderServiceImpl implements NotificationReaderService{
+public class NotificationReaderServiceImpl implements NotificationReaderService {
     private final NotificationReaderRepository notificationReaderRepository;
     private final NotificationMapper notificationMapper;
 
@@ -28,9 +28,10 @@ public class NotificationReaderServiceImpl implements NotificationReaderService{
 
     @Override
     public List<NotificationResponceDto> findAllNotificationsWithSubscription(UUID technicalId) {
-        return notificationReaderRepository
-                .getAllNotificationsForAccountWithSubscription(technicalId)
-                .stream().map(notificationEntity -> notificationMapper.fromEntity(notificationEntity))
-                .toList();
+//        return notificationReaderRepository
+//                .getAllNotificationsForAccountWithSubscription(technicalId)
+//                .stream().map(notificationEntity -> notificationMapper.fromEntity(notificationEntity))
+//                .toList();
+        return null;
     }
 }

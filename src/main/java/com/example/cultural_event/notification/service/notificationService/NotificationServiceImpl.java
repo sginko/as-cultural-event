@@ -29,7 +29,8 @@ public class NotificationServiceImpl implements NotificationService, NotifyListe
     @Transactional
     public void sendNotifications(EventEntity event, List<AccountEntity> accounts) {
         for (AccountEntity account : accounts) {
-            NotificationEntity notificationEntity = new NotificationEntity(event, account, "Notification about " + event.getEventName() + " for your city " + event.getCity());
+            //NotificationEntity notificationEntity = new NotificationEntity(event, account, "Notification about " + event.getEventName() + " for your city " + event.getCity());
+            NotificationEntity notificationEntity = new NotificationEntity("Notification about " + event.getEventName(),event.getCity());
             notificationRepository.save(notificationEntity);
             account.receiveNotification(event.getEventName(), "has been created");
         }
@@ -40,8 +41,9 @@ public class NotificationServiceImpl implements NotificationService, NotifyListe
     public void sendNotificationsForSubscription(EventEntity event, List<SubscriptionEntity> subscriptions) {
         for (SubscriptionEntity subscription : subscriptions) {
             AccountEntity account = subscription.getAccount();
-            NotificationEntity notificationEntity = new NotificationEntity(event, account, "Reminder: " + event.getEventName() + " starts in an hour in " + event.getCity());
-            notificationRepository.save(notificationEntity);
+            //NotificationEntity notificationEntity = new NotificationEntity(event, account, "Reminder: " + event.getEventName() + " starts in an hour in " + event.getCity());
+
+            //notificationRepository.save(notificationEntity);
             account.receiveNotification(event.getEventName(), "starts in an hour");
         }
     }

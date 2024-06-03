@@ -12,25 +12,25 @@ import lombok.Setter;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
 @Setter
-@Table(name = "events_accounts")
+@Table(name = "notifications")
 public class NotificationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "event_id")
-    private EventEntity events;
-
-    @ManyToOne
-    @JoinColumn(name = "account_id")
-    private AccountEntity account;
+//    @ManyToOne
+//    @JoinColumn(name = "event_id")
+//    private EventEntity events;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "account_id")
+//    private AccountEntity account;
 
     private String notification;
+    private String city;
 
-    public NotificationEntity(EventEntity events, AccountEntity account, String notification) {
-        this.events = events;
-        this.account = account;
+    public NotificationEntity(String notification, String city) {
         this.notification = notification;
+        this.city = city;
     }
 }

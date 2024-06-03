@@ -27,9 +27,9 @@ public class AccountController {
 
     @GetMapping("/{user_id}/notifications")
     public List<NotificationResponceDto> findAllNotificationsForSubscribedEvents(@PathVariable("user_id") UUID technicalId, @RequestParam(defaultValue = "false") Boolean subscribed) {
-        if (subscribed) {
-            return accountService.findAllNotificationsForSubscribedEvents(technicalId);
-        }
+//        if (subscribed) {
+//            return accountService.findAllNotificationsForSubscribedEvents(technicalId);
+//        }
         return accountService.findAllNotifications(technicalId);
     }
 }
