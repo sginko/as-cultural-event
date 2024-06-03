@@ -25,4 +25,9 @@ public class NotificationReaderServiceImpl implements NotificationReaderService{
                 .stream().map(notificationEntity -> notificationMapper.fromEntity(notificationEntity))
                 .toList();
     }
+
+    @Override
+    public List<NotificationResponceDto> findAllNotificationsWithSubscription(UUID technicalId) {
+        return null;
+    }
 }

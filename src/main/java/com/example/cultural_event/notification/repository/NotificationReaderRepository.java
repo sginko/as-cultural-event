@@ -15,4 +15,8 @@ public interface NotificationReaderRepository extends JpaRepository<Notification
     @Query("SELECT n FROM NotificationEntity n WHERE n.account.technicalId = :technicalId")
     List<NotificationEntity> getAllNotificationsForAccount(UUID technicalId);
 
+    @Transactional
+    @Query("SELECT n FROM NotificationEntity n WHERE n.account.technicalId = :technicalId"+
+    "AND EXISTS (SELECT s FROM SubscriptionEntity s WHERE s.account.technicalId=:technicalId AND s.events=n.events)")
+    List<NotificationEntity> getAllNotificationsForAccountWithSubscription(UUID technicalId);
 }

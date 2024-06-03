@@ -30,4 +30,8 @@ public class AccountController {
         return accountService.findAllNotifications(technicalId);
     }
 
+    @GetMapping("/{user_id}/notifications?subscribed=true")
+    public List<NotificationResponceDto> findAllNotificationsForSubscribedEvents(@PathVariable("user_id") UUID technicalId) {
+        return accountService.findAllNotificationsForSubscribedEvents(technicalId);
+    }
 }
