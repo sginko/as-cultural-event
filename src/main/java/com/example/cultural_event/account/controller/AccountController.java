@@ -26,12 +26,10 @@ public class AccountController {
     }
 
     @GetMapping("/{user_id}/notifications")
-    public List<NotificationResponceDto> findAllNotificationsForAccount(@PathVariable("user_id") UUID technicalId) {
+    public List<NotificationResponceDto> findAllNotificationsForSubscribedEvents(@PathVariable("user_id") UUID technicalId, @RequestParam(defaultValue = "false") Boolean subscribed) {
+        if (subscribed) {
+            return accountService.findAllNotificationsForSubscribedEvents(technicalId);
+        }
         return accountService.findAllNotifications(technicalId);
-    }
-
-    @GetMapping("/{user_id}/notifications?subscribed=true")
-    public List<NotificationResponceDto> findAllNotificationsForSubscribedEvents(@PathVariable("user_id") UUID technicalId) {
-        return accountService.findAllNotificationsForSubscribedEvents(technicalId);
     }
 }
