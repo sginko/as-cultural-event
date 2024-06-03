@@ -7,6 +7,8 @@ import com.example.cultural_event.event.model.dto.EventRequestDto;
 import com.example.cultural_event.event.model.enity.EventEntity;
 import com.example.cultural_event.event.model.mapper.EventMapper;
 import com.example.cultural_event.event.model.repository.EventRepository;
+import com.example.cultural_event.subscription.entity.SubscriptionEntity;
+import com.example.cultural_event.subscription.service.SubscriptionReaderService;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -17,12 +19,14 @@ import java.util.UUID;
 public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
     private final EventMapper eventMapper;
-    private NotifyListener notifyListener;
+    private final NotifyListener notifyListener;
+    private final SubscriptionReaderService subscriptionReaderService;
 
-    public EventServiceImpl(EventRepository eventRepository, EventMapper eventMapper, NotifyListener notifyListener) {
+    public EventServiceImpl(EventRepository eventRepository, EventMapper eventMapper, NotifyListener notifyListener, SubscriptionReaderService subscriptionReaderService) {
         this.eventRepository = eventRepository;
         this.eventMapper = eventMapper;
         this.notifyListener = notifyListener;
+        this.subscriptionReaderService = subscriptionReaderService;
     }
 
     @Override
@@ -62,6 +66,10 @@ public class EventServiceImpl implements EventService {
     public void deleteByEventId(UUID eventId) {
         EventEntity eventEntity = eventRepository.findByEventId(eventId)
                 .orElseThrow(() -> new EventException("Event for id: " + eventId + " not found"));
+
+        List<SubscriptionEntity> byEvent = subscriptionReaderService.findByEvent(eventEntity);
+        subscriptionReaderService.deleteAll(byEvent);
+
         eventRepository.deleteByEventId(eventEntity.getEventId());
     }
 

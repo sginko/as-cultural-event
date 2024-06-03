@@ -46,6 +46,6 @@ public class EventEntity {
         this.eventId = UUID.randomUUID();
         this.eventName = eventName;
         this.city = city;
-        this.dateTimeEvent = dateTimeEvent;
+        this.dateTimeEvent = dateTimeEvent.withSecond(0).withNano(0);
     }
 }

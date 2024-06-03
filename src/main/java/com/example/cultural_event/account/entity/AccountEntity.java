@@ -43,8 +43,7 @@ public class AccountEntity {
         }
     }
 
-    public void receiveNotification(String eventName) {
-        System.out.println("Notification for account " + name + ": Event " + eventName + " has been created. In work...");
+    public void receiveNotification(String eventName, String content) {
+        System.out.println("Notification for account " + name + ": Event " + eventName + " " + content);
     }
-
 }

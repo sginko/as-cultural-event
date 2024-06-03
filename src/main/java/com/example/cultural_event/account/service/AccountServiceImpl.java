@@ -2,9 +2,7 @@ package com.example.cultural_event.account.service;
 
 import com.example.cultural_event.account.AccountMapper;
 import com.example.cultural_event.account.dto.AccountRequestDto;
-import com.example.cultural_event.account.repository.AccountReader;
 import com.example.cultural_event.account.repository.AccountRepository;
-import com.example.cultural_event.notification.NotificationMapper;
 import com.example.cultural_event.notification.dto.NotificationResponceDto;
 import com.example.cultural_event.notification.service.notificationReaderService.NotificationReaderService;
 import org.springframework.stereotype.Service;
@@ -15,18 +13,14 @@ import java.util.UUID;
 @Service
 public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
-    private final AccountReader accountReader;
-    //private final NotificationReader notificationReader;
     private final NotificationReaderService notificationReaderService;
     private final AccountMapper accountMapper;
-    private final NotificationMapper notificationMapper;
 
-    public AccountServiceImpl(AccountRepository accountRepository, AccountReader accountReader, NotificationReaderService notificationReaderService, AccountMapper accountMapper, NotificationMapper notificationMapper) {
+    public AccountServiceImpl(AccountRepository accountRepository, NotificationReaderService notificationReaderService,
+                              AccountMapper accountMapper) {
         this.accountRepository = accountRepository;
-        this.accountReader = accountReader;
         this.notificationReaderService = notificationReaderService;
         this.accountMapper = accountMapper;
-        this.notificationMapper = notificationMapper;
     }
 
     @Override
