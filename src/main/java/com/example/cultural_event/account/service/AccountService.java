@@ -10,4 +10,6 @@ public interface AccountService {
     void addNewAccount(AccountRequestDto accountRequestDto);
 
     List<NotificationResponceDto> findAllNotifications(UUID technicalId);
+
+    List<NotificationResponceDto> findAllNotificationsForSubscribedEvents(UUID technicalId);
 }

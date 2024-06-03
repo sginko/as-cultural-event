@@ -39,4 +39,10 @@ public class AccountServiceImpl implements AccountService {
         List<NotificationResponceDto> allNotifications = notificationReaderService.findAllNotifications(technicalId);
         return allNotifications;
     }
+
+    @Override
+    public List<NotificationResponceDto> findAllNotificationsForSubscribedEvents(UUID technicalId) {
+        List<NotificationResponceDto> allNotificationsWithSubscribtion = notificationReaderService.findAllNotifications(technicalId);
+        return allNotificationsWithSubscribtion;
+    }
 }
