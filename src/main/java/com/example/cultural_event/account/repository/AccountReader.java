@@ -12,5 +12,5 @@ import java.util.UUID;
 @Repository
 public interface AccountReader extends JpaRepository<AccountEntity,Long> {
     List<AccountEntity> findByCity(String city);
-//    Optional<AccountEntity> findByAccountId(UUID accountId);
+    Optional<AccountEntity> findByTechnicalId(UUID accountId);
 }

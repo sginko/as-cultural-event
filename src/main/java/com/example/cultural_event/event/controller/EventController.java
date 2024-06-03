@@ -53,7 +53,7 @@ public class EventController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/{event_id}/subscribe")
-    public void addSubscription(@PathVariable("event_id") UUID eventId, @RequestBody UUID accountId){
-        subscriptionService.addSubscriptionForEvent(eventId, accountId);
+    public void addSubscription(@PathVariable("event_id") UUID eventId, @RequestBody AccountRequestDto accountRequestDto){
+        subscriptionService.addSubscriptionForEvent(eventId, accountRequestDto.getTechnicalId());
     }
 }
