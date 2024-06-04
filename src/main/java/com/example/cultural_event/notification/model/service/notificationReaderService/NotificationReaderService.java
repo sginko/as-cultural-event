@@ -1,12 +1,11 @@
 package com.example.cultural_event.notification.model.service.notificationReaderService;
 
-import com.example.cultural_event.notification.model.dto.NotificationResponceDto;
+import com.example.cultural_event.notification.model.dto.NotificationResponseDto;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface NotificationReaderService {
-    List<NotificationResponceDto> findAllNotifications(UUID technicalId);
 
-    List<NotificationResponceDto> findAllNotificationsWithSubscription(UUID technicalId);
+    List<NotificationResponseDto> findAllNotifications(UUID technicalId);
 }

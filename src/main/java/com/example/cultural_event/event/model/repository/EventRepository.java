@@ -15,5 +15,5 @@ public interface EventRepository extends JpaRepository<EventEntity, Long> {
 
     Optional<EventEntity> findByEventId(UUID eventId);
 
-    Optional<EventEntity> deleteByEventId(UUID eventId);
+    void deleteByEventId(UUID eventId);
 }
