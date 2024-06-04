@@ -16,14 +16,6 @@ public class NotificationEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-//    @ManyToOne
-//    @JoinColumn(name = "event_id")
-//    private EventEntity events;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "account_id")
-//    private AccountEntity account;
-
     private String notification;
     private String city;
 
@@ -32,4 +24,3 @@ public class NotificationEntity {
         this.city = city;
     }
 }
-
