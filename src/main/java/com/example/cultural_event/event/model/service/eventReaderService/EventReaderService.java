@@ -12,4 +12,6 @@ public interface EventReaderService {
     Optional<EventEntity> findByEventId(UUID eventId);
 
     List<EventEntity> findAllByDateTimeEvent(LocalDateTime dateTimeEvent);
+
+    List<EventEntity> findByCity(String city);
 }

@@ -68,10 +68,6 @@ public class EventServiceImpl implements EventService {
         EventEntity eventEntity = eventRepository.findByEventId(eventId)
                 .orElseThrow(() -> new EventException("Event for id: " + eventId + " not found"));
         eventRepository.deleteByEventId(eventEntity.getEventId());
-
-//        List<SubscriptionEntity> byEvent = subscriptionReaderService.findByEvent(eventEntity);
-//        subscriptionReaderService.deleteAll(byEvent);
-
     }
 
     @Override

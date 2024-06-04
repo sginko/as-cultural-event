@@ -29,28 +29,17 @@ public class NotificationServiceImpl implements NotificationService, Notificatio
     @Transactional
     public void sendNotifications(EventEntity event, List<UserEntity> users) {
         for (UserEntity user : users) {
-            //NotificationEntity notificationEntity = new NotificationEntity(event, account, "Notification about " + event.getEventName() + " for your city " + event.getCity());
-            NotificationEntity notificationEntity = new NotificationEntity("Notification about " + event.getEventName(),event.getCity());
-            notificationRepository.save(notificationEntity);
             user.receiveNotification(event.getEventName(), "has been created");
         }
     }
 
-//    @Override
-//    @Transactional
-//    public void sendNotificationsForSubscription(EventEntity event, List<SubscriptionEntity> subscriptions) {
-//        for (SubscriptionEntity subscription : subscriptions) {
-//            AccountEntity account = subscription.getAccount();
-//            //NotificationEntity notificationEntity = new NotificationEntity(event, account, "Reminder: " + event.getEventName() + " starts in an hour in " + event.getCity());
-//
-//            //notificationRepository.save(notificationEntity);
-//            account.receiveNotification(event.getEventName(), "starts in an hour");
-//        }
-//    }
-
     @Override
     public void notificationFromEvent(EventEntity event) {
+        NotificationEntity notificationEntity = new NotificationEntity("Notification about " + event.getEventName(), event.getCity());
+        notificationRepository.save(notificationEntity);
+
         List<UserEntity> users = userReaderService.findByCity(event.getCity());
-        createNotifications(event, users);
+        sendNotifications(event, users);
     }
+
 }

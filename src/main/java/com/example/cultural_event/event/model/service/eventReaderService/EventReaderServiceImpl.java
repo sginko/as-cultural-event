@@ -27,4 +27,9 @@ public class EventReaderServiceImpl implements EventReaderService {
     public List<EventEntity> findAllByDateTimeEvent(LocalDateTime dateTimeEvent) {
         return eventReaderRepository.findAllEventsByDateTimeEvent(dateTimeEvent);
     }
+
+    @Override
+    public List<EventEntity> findByCity(String city) {
+        return eventReaderRepository.findByCity(city);
+    }
 }
