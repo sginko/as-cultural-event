@@ -1,5 +1,6 @@
 package com.example.cultural_event.notification.service;
 
+import com.example.cultural_event.notification.model.service.notificationService.NotificationListener;
 import com.example.cultural_event.user.entity.UserEntity;
 import com.example.cultural_event.user.repository.UserRepository;
 import com.example.cultural_event.event.model.enity.EventEntity;
@@ -8,6 +9,7 @@ import com.example.cultural_event.notification.model.enity.NotificationEntity;
 import com.example.cultural_event.notification.model.repository.NotificationRepository;
 import com.example.cultural_event.notification.model.service.notificationService.NotificationServiceImpl;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,21 +34,23 @@ class NotificationServiceImplTest {
     private UserRepository userRepository;
     @Autowired
     private NotificationServiceImpl notificationService;
-    @AfterEach
+    @Autowired
+    private NotificationListener notificationListener;
+
+    @BeforeEach
     void tearDown() {
         notificationRepository.deleteAll();
+        eventRepository.deleteAll();
+        userRepository.deleteAll();
     }
 
     @Test
     public void should_create_notification_for_event_successfully() {
         //given
         EventEntity event = prepareEvent(NAME_EVENT, CITY, DATE_OF_EVENT);
-        UserEntity userEntity = prapareAccount(NAME_ACCOUNT, CITY, EMAIL);
-        List<UserEntity> userEntityList = List.of(userEntity);
         eventRepository.save(event);
-        userRepository.save(userEntity);
         //when
-        notificationService.sendNotifications(event, userEntityList);
+        notificationListener.notificationFromEvent(event);
         //and
         List<NotificationEntity> all = notificationRepository.findAll();
         //then
