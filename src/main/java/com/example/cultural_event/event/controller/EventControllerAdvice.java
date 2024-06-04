@@ -1,6 +1,6 @@
 package com.example.cultural_event.event.controller;
 
-import com.example.cultural_event.event.model.service.EventException;
+import com.example.cultural_event.event.model.EventException;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

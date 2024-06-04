@@ -1,12 +1,12 @@
 package com.example.cultural_event.notification.service;
 
-import com.example.cultural_event.account.entity.AccountEntity;
-import com.example.cultural_event.account.repository.AccountRepository;
+import com.example.cultural_event.user.entity.UserEntity;
+import com.example.cultural_event.user.repository.UserRepository;
 import com.example.cultural_event.event.model.enity.EventEntity;
 import com.example.cultural_event.event.model.repository.EventRepository;
-import com.example.cultural_event.notification.enity.NotificationEntity;
-import com.example.cultural_event.notification.repository.NotificationRepository;
-import com.example.cultural_event.notification.service.notificationService.NotificationServiceImpl;
+import com.example.cultural_event.notification.model.enity.NotificationEntity;
+import com.example.cultural_event.notification.model.repository.NotificationRepository;
+import com.example.cultural_event.notification.model.service.notificationService.NotificationServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ class NotificationServiceImplTest {
     @Autowired
     private EventRepository eventRepository;
     @Autowired
-    private AccountRepository accountRepository;
+    private UserRepository userRepository;
     @Autowired
     private NotificationServiceImpl notificationService;
     @AfterEach
@@ -41,12 +41,12 @@ class NotificationServiceImplTest {
     public void should_create_notification_for_event_successfully() {
         //given
         EventEntity event = prepareEvent(NAME_EVENT, CITY, DATE_OF_EVENT);
-        AccountEntity accountEntity = prapareAccount(NAME_ACCOUNT, CITY, EMAIL);
-        List<AccountEntity> accountEntityList = List.of(accountEntity);
+        UserEntity userEntity = prapareAccount(NAME_ACCOUNT, CITY, EMAIL);
+        List<UserEntity> userEntityList = List.of(userEntity);
         eventRepository.save(event);
-        accountRepository.save(accountEntity);
+        userRepository.save(userEntity);
         //when
-        notificationService.sendNotifications(event,accountEntityList);
+        notificationService.sendNotifications(event, userEntityList);
         //and
         List<NotificationEntity> all = notificationRepository.findAll();
         //then
@@ -54,8 +54,8 @@ class NotificationServiceImplTest {
         assertThat(all.get(0).getNotification().contains(CITY));
     }
 
-    private AccountEntity prapareAccount(String nameAccount, String city, String email) {
-        return new AccountEntity(nameAccount, city, email);
+    private UserEntity prapareAccount(String nameAccount, String city, String email) {
+        return new UserEntity(nameAccount, city, email);
     }
 
     private EventEntity prepareEvent(String nameEvent, String city, LocalDateTime dateOfEvent) {
