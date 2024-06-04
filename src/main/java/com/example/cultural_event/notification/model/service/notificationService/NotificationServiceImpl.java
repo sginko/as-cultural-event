@@ -21,7 +21,6 @@ public class NotificationServiceImpl implements NotificationService, Notificatio
     }
 
     @Override
-    @Transactional
     public void sendNotifications(EventEntity event, List<UserEntity> users) {
         for (UserEntity user : users) {
             user.receiveNotification(event.getEventName(), "has been created");
