@@ -19,7 +19,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class NotificationServiceImplTest {
+class NotificationServiceTest {
     private final String NAME_EVENT = "HOLIDAY";
     private final String CITY = "BERLIN";
     private final LocalDateTime DATE_OF_EVENT = LocalDateTime.now().plusDays(10);
