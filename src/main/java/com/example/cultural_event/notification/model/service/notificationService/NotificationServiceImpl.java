@@ -33,7 +33,7 @@ public class NotificationServiceImpl implements NotificationService, Notificatio
         NotificationEntity notificationEntity = new NotificationEntity("Notification about " + event.getEventName(), event.getCity());
         notificationRepository.save(notificationEntity);
 
-        List<UserEntity> users = userReaderService.findByCity(event.getCity().toUpperCase());
+        List<UserEntity> users = userReaderService.findByCity(event.getCity());
         sendNotifications(event, users);
     }
 }

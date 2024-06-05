@@ -8,7 +8,6 @@ import com.example.cultural_event.event.model.repository.EventRepository;
 import com.example.cultural_event.notification.model.enity.NotificationEntity;
 import com.example.cultural_event.notification.model.repository.NotificationRepository;
 import com.example.cultural_event.notification.model.service.notificationService.NotificationServiceImpl;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +57,23 @@ class NotificationServiceImplTest {
         assertThat(all.get(0).getNotification().contains(CITY));
     }
 
-    private UserEntity prapareAccount(String nameAccount, String city, String email) {
+    @Test
+    public void should_create_notification_for_event_successfully_when_user_is_exist() {
+        //given
+        EventEntity event = prepareEvent(NAME_EVENT, CITY, DATE_OF_EVENT);
+        eventRepository.save(event);
+        UserEntity userEntity = prepareUser(NAME_ACCOUNT, CITY, EMAIL);
+        userRepository.save(userEntity);
+        //when
+        notificationListener.notificationFromEvent(event);
+        //and
+        List<NotificationEntity> all = notificationRepository.findAll();
+        //then
+        assertThat(all.size()).isEqualTo(1);
+        assertThat(all.get(0).getNotification().contains(CITY));
+    }
+
+    private UserEntity prepareUser(String nameAccount, String city, String email) {
         return new UserEntity(nameAccount, city, email);
     }
 
