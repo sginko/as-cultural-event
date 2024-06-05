@@ -7,6 +7,8 @@ import com.example.cultural_event.event.model.enity.EventEntity;
 import com.example.cultural_event.event.model.mapper.EventMapper;
 import com.example.cultural_event.event.model.repository.EventRepository;
 import com.example.cultural_event.notification.model.service.notificationService.NotificationListener;
+import com.example.cultural_event.subscription.service.SubscriptionReaderService;
+import com.example.cultural_event.user.entity.UserEntity;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +20,13 @@ public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
     private final EventMapper eventMapper;
     private final NotificationListener notificationListener;
+    private final SubscriptionReaderService subscriptionReaderService;
 
-    public EventServiceImpl(EventRepository eventRepository, EventMapper eventMapper, NotificationListener notificationListener) {
+    public EventServiceImpl(EventRepository eventRepository, EventMapper eventMapper, NotificationListener notificationListener, SubscriptionReaderService subscriptionReaderService) {
         this.eventRepository = eventRepository;
         this.eventMapper = eventMapper;
         this.notificationListener = notificationListener;
+        this.subscriptionReaderService = subscriptionReaderService;
     }
 
     @Override
@@ -30,7 +34,7 @@ public class EventServiceImpl implements EventService {
     public void addEvent(EventRequestDto eventRequestDto) {
         EventEntity event = eventMapper.toEntity(eventRequestDto);
         eventRepository.save(event);
-        notificationListener.notificationFromEvent(event);
+        notificationListener.notificationAboutCreationEvent(event);
     }
 
     @Override
@@ -52,20 +56,22 @@ public class EventServiceImpl implements EventService {
     @Override
     @Transactional
     public void deleteByEventId(UUID eventId) {
-        EventEntity eventEntity = eventRepository.findByEventId(eventId)
+        EventEntity event = eventRepository.findByEventId(eventId)
                 .orElseThrow(() -> new EventException("Event for id: " + eventId + " not found"));
-        eventRepository.deleteByEventId(eventEntity.getEventId());
+        List<UserEntity> allUsersByEvent = subscriptionReaderService.findAllUsersByEvent(eventId);
+        notificationListener.notificationAboutDeletionEvent(event, allUsersByEvent);
+        eventRepository.deleteByEventId(event.getEventId());
     }
 
     @Override
     @Transactional
     public void updateEvent(UUID eventId, EventRequestDto eventRequestDto) {
-        EventEntity eventEntity = eventRepository.findByEventId(eventId)
+        EventEntity event = eventRepository.findByEventId(eventId)
                 .orElseThrow(() -> new EventException("Event for id: " + eventId + " not found"));
 
-        eventEntity.setEventName(eventRequestDto.getEventName());
-        eventEntity.setCity(eventRequestDto.getCity());
-        eventEntity.setDateTimeEvent(eventRequestDto.getDateTimeEvent());
-        eventRepository.save(eventEntity);
+        event.setEventName(eventRequestDto.getEventName());
+        event.setCity(eventRequestDto.getCity());
+        event.setDateTimeEvent(eventRequestDto.getDateTimeEvent());
+        eventRepository.save(event);
     }
 }

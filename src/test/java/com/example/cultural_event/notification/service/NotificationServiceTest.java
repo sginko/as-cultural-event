@@ -49,7 +49,7 @@ class NotificationServiceTest {
         EventEntity event = prepareEvent(NAME_EVENT, CITY, DATE_OF_EVENT);
         eventRepository.save(event);
         //when
-        notificationListener.notificationFromEvent(event);
+        notificationListener.notificationAboutCreationEvent(event);
         //and
         List<NotificationEntity> all = notificationRepository.findAll();
         //then
@@ -65,7 +65,7 @@ class NotificationServiceTest {
         UserEntity userEntity = prepareUser(NAME_ACCOUNT, CITY, EMAIL);
         userRepository.save(userEntity);
         //when
-        notificationListener.notificationFromEvent(event);
+        notificationListener.notificationAboutCreationEvent(event);
         //and
         List<NotificationEntity> all = notificationRepository.findAll();
         //then

@@ -22,14 +22,14 @@ public class NotificationServiceImpl implements NotificationService, Notificatio
     }
 
     @Override
-    public void sendNotifications(EventEntity event, List<UserEntity> users) {
+    public void sendNotificationsForAllUsersAboutCreatingEvent(EventEntity event, List<UserEntity> users, String content) {
         for (UserEntity user : users) {
-            user.receiveNotification(event.getEventName(), "has been created");
+            user.receiveNotification(event.getEventName(), content);
         }
     }
 
     @Override
-    public void sendNotificationsForSubscription(EventEntity event, List<SubscriptionEntity> subscriptions) {
+    public void sendNotificationsAboutUpcomingEvent(EventEntity event, List<SubscriptionEntity> subscriptions) {
         for (SubscriptionEntity subscription : subscriptions) {
             UserEntity user = subscription.getUser();
             NotificationEntity notificationEntity = new NotificationEntity(event.getEventId(), "Reminder: " + event.getEventName() + " starts in an hour in " + event.getCity(), event.getCity());
@@ -40,11 +40,19 @@ public class NotificationServiceImpl implements NotificationService, Notificatio
 
     @Override
     @Transactional
-    public void notificationFromEvent(EventEntity event) {
+    public void notificationAboutCreationEvent(EventEntity event) {
         NotificationEntity notificationEntity = new NotificationEntity(event.getEventId(), "Notification about " + event.getEventName(), event.getCity());
         notificationRepository.save(notificationEntity);
 
         List<UserEntity> users = userReaderService.findByCity(event.getCity());
-        sendNotifications(event, users);
+        sendNotificationsForAllUsersAboutCreatingEvent(event, users, " has been created");
+    }
+
+    @Override
+    public void notificationAboutDeletionEvent(EventEntity event, List<UserEntity> users) {
+        NotificationEntity notificationEntity = new NotificationEntity(event.getEventId(), "Notification about deletion " + event.getEventName(), event.getCity());
+        notificationRepository.save(notificationEntity);
+
+        sendNotificationsForAllUsersAboutCreatingEvent(event, users, " has been deleted");
     }
 }
