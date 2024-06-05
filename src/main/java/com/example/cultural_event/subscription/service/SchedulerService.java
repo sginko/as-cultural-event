@@ -31,6 +31,7 @@ public class SchedulerService {
         for (EventEntity event : upcomingEvents) {
             List<SubscriptionEntity> subscriptions = subscriptionReaderService.findByEvent(event);
             notificationService.sendNotificationsAboutUpcomingEvent(event, subscriptions);
+
         }
     }
 }
