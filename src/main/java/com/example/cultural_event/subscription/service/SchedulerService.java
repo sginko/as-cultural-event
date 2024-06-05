@@ -27,10 +27,8 @@ public class SchedulerService {
     public void sendEventNotifications() {
         LocalDateTime oneHourFromNow = LocalDateTime.now().plusHours(1).withSecond(0).withNano(0);
         List<EventEntity> upcomingEvents = eventReaderService.findAllByDateTimeEvent(oneHourFromNow);
-        System.out.println(upcomingEvents);
         for (EventEntity event : upcomingEvents) {
             List<SubscriptionEntity> subscriptions = subscriptionReaderService.findByEvent(event);
-            System.out.println(subscriptions);
             notificationService.sendNotificationsForSubscription(event, subscriptions);
         }
     }
