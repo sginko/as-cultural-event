@@ -5,6 +5,8 @@ import com.example.cultural_event.user.repository.UserReaderRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserReaderServiceImpl implements UserReaderService {
@@ -17,5 +19,10 @@ public class UserReaderServiceImpl implements UserReaderService {
     @Override
     public List<UserEntity> findByCity(String city) {
         return userReaderRepository.findByCity(city);
+    }
+
+    @Override
+    public Optional<UserEntity> findByTechnicalId(UUID technicalId) {
+        return userReaderRepository.findByTechnicalId(technicalId);
     }
 }

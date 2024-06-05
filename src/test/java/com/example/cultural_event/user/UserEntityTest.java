@@ -18,35 +18,43 @@ class UserEntityTest {
     @Test
     public void should_create_account_with_correct_fields() {
         //given
+
         //when
         UserEntity userEntity = new UserEntity(CORRECT_NAME, CITY, CORRECT_EMAIL);
+
         //then
         assertThat(userEntity).isNotNull();
     }
 
     @Test
-    public void should_create_account_with_empty_name() {
+    public void should_not_create_account_with_empty_name() {
         //given
+
         //when
         Executable e = () -> new UserEntity("", CITY, CORRECT_EMAIL);
+
         //then
         UserException exc = assertThrows(UserException.class, e);
         assertThat(exc.getMessage().contains("empty")).isTrue();
     }
     @Test
-    public void should_create_account_with_wrong_email() {
+    public void should_not_create_account_with_wrong_email() {
         //given
+
         //when
         Executable e = () -> new UserEntity(CORRECT_NAME, CITY, EMAIL_WITH_SPACE);
+
         //then
         UserException exc = assertThrows(UserException.class, e);
         assertThat(exc.getMessage().contains("Check")).isTrue();
     }
     @Test
-    public void should_create_account_without_at() {
+    public void should_not_create_account_without_at() {
         //given
+
         //when
         Executable e = () -> new UserEntity(CORRECT_NAME, CITY, EMAIL_WITHOUT_AT);
+
         //then
         UserException exc = assertThrows(UserException.class, e);
         assertThat(exc.getMessage().contains("Check")).isTrue();

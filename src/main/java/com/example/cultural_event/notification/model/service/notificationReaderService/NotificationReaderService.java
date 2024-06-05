@@ -8,4 +8,6 @@ import java.util.UUID;
 public interface NotificationReaderService {
 
     List<NotificationResponseDto> findAllNotifications(UUID technicalId);
+
+    List<NotificationResponseDto> findAllNotificationsWithSubscription(UUID technicalId);
 }

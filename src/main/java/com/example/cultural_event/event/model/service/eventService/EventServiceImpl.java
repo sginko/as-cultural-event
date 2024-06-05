@@ -38,11 +38,7 @@ public class EventServiceImpl implements EventService {
         List<EventResponseDto> eventList = eventRepository.findAll().stream()
                 .map(eventEntity -> eventMapper.fromEntity(eventEntity))
                 .toList();
-        if (eventList.isEmpty()) {
-            throw new EventException("Cannot find events");
-        } else {
-            return eventList;
-        }
+        return eventList;
     }
 
     @Override
@@ -50,11 +46,7 @@ public class EventServiceImpl implements EventService {
         List<EventResponseDto> eventList = eventRepository.findAllEventsByCity(city.toLowerCase()).stream()
                 .map(eventEntity -> eventMapper.fromEntity(eventEntity))
                 .toList();
-        if (eventList.isEmpty()) {
-            throw new EventException("Cannot find events for city: " + city);
-        } else {
-            return eventList;
-        }
+        return eventList;
     }
 
     @Override

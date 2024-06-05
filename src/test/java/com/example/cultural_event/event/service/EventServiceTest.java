@@ -8,6 +8,7 @@ import com.example.cultural_event.event.model.repository.EventRepository;
 import com.example.cultural_event.event.model.EventException;
 import com.example.cultural_event.event.model.service.eventService.EventService;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-class EventServiceImplTest {
+class EventServiceTest {
     @Autowired
     private EventRepository eventRepository;
 
@@ -33,7 +34,7 @@ class EventServiceImplTest {
     @Autowired
     private EventMapper eventMapper;
 
-    @AfterEach
+    @BeforeEach
     void tearDown() {
         eventRepository.deleteAll();
     }
@@ -73,14 +74,14 @@ class EventServiceImplTest {
     }
 
     @Test
-    void should_throw_exception_when_no_events_found() {
+    void should_return_empty_list_when_no_events_found() {
         // given
 
         // when
-        Executable executable = () -> eventService.findAllEvents();
+        List<EventResponseDto> allEvents = eventService.findAllEvents();
 
         // then
-        assertThrows(EventException.class, executable, "Cannot find events");
+        assertThat(allEvents.size()).isEqualTo(0);
     }
 
     @Test
@@ -91,6 +92,8 @@ class EventServiceImplTest {
         LocalDateTime dateTimeEvent = LocalDateTime.now();
         EventRequestDto eventRequestDto = new EventRequestDto(eventName, city, dateTimeEvent);
         eventService.addEvent(eventRequestDto);
+        EventRequestDto eventRequestDtoSecond = new EventRequestDto(eventName, "WARSZAWA", dateTimeEvent);
+        eventService.addEvent(eventRequestDtoSecond);
 
         //when
         List<EventResponseDto> allEvents = eventService.findAllEventsByCity(city);
@@ -100,7 +103,7 @@ class EventServiceImplTest {
     }
 
     @Test
-    void should_throw_exception_when_no_events_found_for_city() {
+    void should_return_empty_list_of_events_when_no_events_found_for_city() {
         // given
         String eventName = "Test Event Name";
         String city = "City";
@@ -110,10 +113,10 @@ class EventServiceImplTest {
         eventService.addEvent(eventRequestDto);
 
         // when
-        Executable executable = () -> eventService.findAllEventsByCity(incorrectCity);
+        List<EventResponseDto> allEventsByCity = eventService.findAllEventsByCity(incorrectCity);
 
         // then
-        assertThrows(EventException.class, executable, "Cannot find events for city: " + incorrectCity);
+        assertThat(allEventsByCity.size()).isEqualTo(0);
     }
 
     @Test
@@ -136,7 +139,7 @@ class EventServiceImplTest {
     }
 
     @Test
-    void should_throw_exception_when_no_events_found_for_eventId() {
+    void should_throw_exception_when_not_found_event_by_eventId_during_deletion() {
         //given
         UUID incorrectEventId = UUID.randomUUID();
         String eventName = "Test Event Name";

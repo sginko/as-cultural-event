@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface EventService {
+
     void addEvent(EventRequestDto eventRequestDto);
 
     List<EventResponseDto> findAllEvents();

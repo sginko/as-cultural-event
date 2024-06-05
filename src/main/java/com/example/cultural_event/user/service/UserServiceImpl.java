@@ -48,4 +48,10 @@ public class UserServiceImpl implements UserService {
         List<NotificationResponseDto> allNotifications = notificationReaderService.findAllNotifications(technicalId);
         return allNotifications;
     }
+
+    @Override
+    public List<NotificationResponseDto> findAllNotificationsForSubscribedEvents(UUID technicalId) {
+        List<NotificationResponseDto> allNotificationsWithSubscribtion = notificationReaderService.findAllNotificationsWithSubscription(technicalId);
+        return allNotificationsWithSubscribtion;
+    }
 }

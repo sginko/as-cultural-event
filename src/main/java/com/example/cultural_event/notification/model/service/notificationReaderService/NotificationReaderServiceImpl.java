@@ -1,6 +1,6 @@
 package com.example.cultural_event.notification.model.service.notificationReaderService;
 
-import com.example.cultural_event.notification.mapper.NotificationMapper;
+import com.example.cultural_event.notification.model.mapper.NotificationMapper;
 import com.example.cultural_event.notification.model.dto.NotificationResponseDto;
 import com.example.cultural_event.notification.model.repository.NotificationReaderRepository;
 import org.springframework.stereotype.Service;
@@ -24,5 +24,14 @@ public class NotificationReaderServiceImpl implements NotificationReaderService 
                 .getAllNotificationsForAccount(technicalId)
                 .stream().map(notificationEntity -> notificationMapper.fromEntity(notificationEntity))
                 .toList();
+    }
+
+    @Override
+    public List<NotificationResponseDto> findAllNotificationsWithSubscription(UUID technicalId) {
+        return List.of(new NotificationResponseDto(UUID.randomUUID(), "", ""));
+//        return notificationReaderRepository
+//                .getAllNotificationsForAccountWithSubscription(technicalId)
+//                .stream().map(notificationEntity -> notificationMapper.fromEntity(notificationEntity))
+//                .toList();
     }
 }

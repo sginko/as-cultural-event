@@ -16,7 +16,7 @@ public class EventControllerAdvice {
 
     @ExceptionHandler(EventException.class)
     public ResponseEntity handleEventException(EventException e) {
-        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(e.getMessage());
     }
 

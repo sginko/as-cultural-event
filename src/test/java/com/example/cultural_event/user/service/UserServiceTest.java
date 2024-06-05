@@ -20,7 +20,7 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class UserServiceImplTest {
+class UserServiceTest {
     private final String CORRECT_NAME = "Flo69";
     private final String CORRECT_EMAIL = "Destin.Smith@yahoo.com";
     private final String CITY = "South Luthermouth";

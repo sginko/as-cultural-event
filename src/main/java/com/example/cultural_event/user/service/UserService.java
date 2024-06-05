@@ -11,4 +11,6 @@ public interface UserService {
     void addNewUser(UserRequestDto userRequestDto);
 
     List<NotificationResponseDto> findAllNotifications(UUID technicalId);
+
+    List<NotificationResponseDto> findAllNotificationsForSubscribedEvents(UUID technicalId);
 }
