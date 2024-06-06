@@ -51,7 +51,7 @@ class UserServiceTest {
     @Test
     public void should_create_new_user_when_data_are_correct() {
         //given
-        UserRequestDto userRequestDto = prepareAccountRequestDto(CORRECT_NAME, CITY, CORRECT_EMAIL);
+        UserRequestDto userRequestDto = prepareUserRequestDto(CORRECT_NAME, CITY, CORRECT_EMAIL);
 
         //when
         userService.addNewUser(userRequestDto);
@@ -66,7 +66,7 @@ class UserServiceTest {
         //given
         EventRequestDto event = new EventRequestDto("event", CITY, LocalDateTime.now());
         eventService.addEvent(event);
-        UserRequestDto userRequestDto = prepareAccountRequestDto(CORRECT_NAME, CITY, CORRECT_EMAIL);
+        UserRequestDto userRequestDto = prepareUserRequestDto(CORRECT_NAME, CITY, CORRECT_EMAIL);
 
         //when
         userService.addNewUser(userRequestDto);
@@ -93,7 +93,7 @@ class UserServiceTest {
         assertThat(allNotifications.size()).isEqualTo(1);
     }
 
-    private UserRequestDto prepareAccountRequestDto(String name, String city, String email) {
+    private UserRequestDto prepareUserRequestDto(String name, String city, String email) {
         return new UserRequestDto(name, city, email);
     }
 }
