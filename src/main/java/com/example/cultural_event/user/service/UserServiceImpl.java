@@ -2,8 +2,8 @@ package com.example.cultural_event.user.service;
 
 import com.example.cultural_event.event.model.enity.EventEntity;
 import com.example.cultural_event.event.model.service.eventReaderService.EventReaderService;
-import com.example.cultural_event.notification.model.dto.NotificationResponseDto;
-import com.example.cultural_event.notification.model.service.notificationReaderService.NotificationReaderService;
+import com.example.cultural_event.notification.dto.NotificationResponseDto;
+import com.example.cultural_event.notification.service.notificationReaderService.NotificationReaderService;
 import com.example.cultural_event.user.dto.UserRequestDto;
 import com.example.cultural_event.user.entity.UserEntity;
 import com.example.cultural_event.user.mapper.UserMapper;

@@ -1,4 +1,4 @@
-package com.example.cultural_event.notification.model.service.notificationService;
+package com.example.cultural_event.notification.service.notificationService;
 
 import com.example.cultural_event.event.model.enity.EventEntity;
 import com.example.cultural_event.user.entity.UserEntity;

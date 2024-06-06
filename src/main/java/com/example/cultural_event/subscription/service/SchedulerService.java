@@ -2,8 +2,8 @@ package com.example.cultural_event.subscription.service;
 
 import com.example.cultural_event.event.model.enity.EventEntity;
 import com.example.cultural_event.event.model.service.eventReaderService.EventReaderService;
-import com.example.cultural_event.notification.model.service.notificationService.NotificationService;
-import com.example.cultural_event.notification.model.service.notificationService.NotificationServiceImpl;
+import com.example.cultural_event.notification.service.notificationService.NotificationService;
+import com.example.cultural_event.notification.service.notificationService.NotificationServiceImpl;
 import com.example.cultural_event.subscription.entity.SubscriptionEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;

@@ -1,4 +1,4 @@
-package com.example.cultural_event.notification.model.dto;
+package com.example.cultural_event.notification.dto;
 
 import lombok.AccessLevel;
 import lombok.Getter;

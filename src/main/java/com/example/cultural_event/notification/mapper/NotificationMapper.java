@@ -1,7 +1,7 @@
-package com.example.cultural_event.notification.model.mapper;
+package com.example.cultural_event.notification.mapper;
 
-import com.example.cultural_event.notification.model.dto.NotificationResponseDto;
-import com.example.cultural_event.notification.model.enity.NotificationEntity;
+import com.example.cultural_event.notification.dto.NotificationResponseDto;
+import com.example.cultural_event.notification.enity.NotificationEntity;
 import org.springframework.stereotype.Component;
 
 @Component

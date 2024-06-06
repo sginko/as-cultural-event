@@ -10,8 +10,6 @@ import java.util.UUID;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class UserRequestDto {
-    private String name;
-    private String city;
-    private String email;
+public class UserIdRequestDto {
+    private UUID technicalId;
 }
