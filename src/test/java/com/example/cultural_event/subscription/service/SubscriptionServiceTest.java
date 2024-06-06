@@ -70,4 +70,5 @@ class SubscriptionServiceTest {
         //then
         assertThat(subscriptionRepository.findAll().size()).isEqualTo(1);
     }
+
 }
