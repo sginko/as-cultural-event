@@ -37,6 +37,7 @@ class UserEntityTest {
         UserException exc = assertThrows(UserException.class, e);
         assertThat(exc.getMessage().contains("empty")).isTrue();
     }
+
     @Test
     public void should_not_create_account_with_wrong_email() {
         //given
@@ -48,6 +49,7 @@ class UserEntityTest {
         UserException exc = assertThrows(UserException.class, e);
         assertThat(exc.getMessage().contains("Check")).isTrue();
     }
+
     @Test
     public void should_not_create_account_without_at() {
         //given

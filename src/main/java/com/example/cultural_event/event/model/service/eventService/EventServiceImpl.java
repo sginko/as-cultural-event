@@ -6,7 +6,7 @@ import com.example.cultural_event.event.model.dto.EventResponseDto;
 import com.example.cultural_event.event.model.enity.EventEntity;
 import com.example.cultural_event.event.model.mapper.EventMapper;
 import com.example.cultural_event.event.model.repository.EventRepository;
-import com.example.cultural_event.notification.model.service.notificationService.NotificationListener;
+import com.example.cultural_event.notification.service.notificationService.NotificationListener;
 import com.example.cultural_event.subscription.service.SubscriptionReaderService;
 import com.example.cultural_event.user.entity.UserEntity;
 import jakarta.transaction.Transactional;

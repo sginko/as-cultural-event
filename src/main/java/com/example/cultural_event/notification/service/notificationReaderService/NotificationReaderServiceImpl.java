@@ -1,8 +1,8 @@
-package com.example.cultural_event.notification.model.service.notificationReaderService;
+package com.example.cultural_event.notification.service.notificationReaderService;
 
-import com.example.cultural_event.notification.model.mapper.NotificationMapper;
-import com.example.cultural_event.notification.model.dto.NotificationResponseDto;
-import com.example.cultural_event.notification.model.repository.NotificationReaderRepository;
+import com.example.cultural_event.notification.dto.NotificationResponseDto;
+import com.example.cultural_event.notification.mapper.NotificationMapper;
+import com.example.cultural_event.notification.repository.NotificationReaderRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

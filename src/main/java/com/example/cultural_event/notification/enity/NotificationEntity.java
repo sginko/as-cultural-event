@@ -1,4 +1,4 @@
-package com.example.cultural_event.notification.model.enity;
+package com.example.cultural_event.notification.enity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;

@@ -5,9 +5,7 @@ import com.example.cultural_event.event.model.dto.EventResponseDto;
 import com.example.cultural_event.event.model.enity.EventEntity;
 import com.example.cultural_event.event.model.mapper.EventMapper;
 import com.example.cultural_event.event.model.repository.EventRepository;
-import com.example.cultural_event.event.model.EventException;
 import com.example.cultural_event.event.model.service.eventService.EventService;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -20,8 +18,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 class EventServiceTest {
@@ -62,7 +58,7 @@ class EventServiceTest {
         String eventName = "Test Event Name";
         String city = "City";
         LocalDateTime dateTimeEvent = LocalDateTime.now();
-        EventRequestDto eventRequestDto = new EventRequestDto(eventName, city, dateTimeEvent);
+        EventRequestDto eventRequestDto = new EventRequestDto( eventName, city, dateTimeEvent);
         eventService.addEvent(eventRequestDto);
 
         //when
@@ -88,18 +84,20 @@ class EventServiceTest {
     void should_find_all_events_by_city() {
         //given
         String eventName = "Test Event Name";
-        String city = "City";
+        String firstCity = "firstCity";
+        String secondCity = "secondCity";
         LocalDateTime dateTimeEvent = LocalDateTime.now();
-        EventRequestDto eventRequestDto = new EventRequestDto(eventName, city, dateTimeEvent);
+
+        EventRequestDto eventRequestDto = new EventRequestDto(eventName, firstCity, dateTimeEvent);
         eventService.addEvent(eventRequestDto);
-        EventRequestDto eventRequestDtoSecond = new EventRequestDto(eventName, "WARSZAWA", dateTimeEvent);
+        EventRequestDto eventRequestDtoSecond = new EventRequestDto(eventName, secondCity, dateTimeEvent);
         eventService.addEvent(eventRequestDtoSecond);
 
         //when
-        List<EventResponseDto> allEvents = eventService.findAllEventsByCity(city);
+        List<EventResponseDto> allEvents = eventService.findAllEventsByCity(firstCity);
 
         //then
-        assertThat(allEvents.get(0).getCity()).isEqualTo(city);
+        assertThat(allEvents.get(0).getCity()).isEqualTo(firstCity);
     }
 
     @Test
@@ -109,6 +107,7 @@ class EventServiceTest {
         String city = "City";
         String incorrectCity = "incorrectCity";
         LocalDateTime dateTimeEvent = LocalDateTime.now();
+
         EventRequestDto eventRequestDto = new EventRequestDto(eventName, city, dateTimeEvent);
         eventService.addEvent(eventRequestDto);
 
@@ -129,10 +128,10 @@ class EventServiceTest {
         EventRequestDto eventRequestDto = new EventRequestDto(eventName, city, dateTimeEvent);
         eventService.addEvent(eventRequestDto);
         List<EventResponseDto> allEvents = eventService.findAllEvents();
-        UUID eventId = allEvents.get(0).getEventId();
+        UUID id = allEvents.get(0).getEventId();
 
         //when
-        eventService.deleteByEventId(eventId);
+        eventService.deleteByEventId(id);
 
         //then
         assertThat(eventRepository.findAll().isEmpty()).isTrue();
@@ -146,11 +145,11 @@ class EventServiceTest {
         String city = "City";
         LocalDateTime dateTimeEvent = LocalDateTime.now();
 
-        EventRequestDto eventRequestDto = new EventRequestDto(eventName, city, dateTimeEvent);
+        EventRequestDto eventRequestDto = new EventRequestDto( eventName, city, dateTimeEvent);
         eventService.addEvent(eventRequestDto);
         List<EventResponseDto> allEvents = eventService.findAllEvents();
-        UUID eventId = allEvents.get(0).getEventId();
-        eventService.deleteByEventId(eventId);
+        UUID id = allEvents.get(0).getEventId();
+        eventService.deleteByEventId(id);
 
         //when
         Executable e = () -> eventService.deleteByEventId(incorrectEventId);
@@ -170,14 +169,14 @@ class EventServiceTest {
         EventRequestDto eventRequestDto = new EventRequestDto(eventName, city, dateTimeEvent);
         eventService.addEvent(eventRequestDto);
         List<EventResponseDto> allEvents = eventService.findAllEvents();
-        UUID eventId = allEvents.get(0).getEventId();
+        UUID id = allEvents.get(0).getEventId();
 
         EventRequestDto updatedEventRequestDto = new EventRequestDto(newEventName, city, dateTimeEvent);
 
         //when
-        eventService.updateEvent(eventId, updatedEventRequestDto);
+        eventService.updateEvent(id, updatedEventRequestDto);
         //and
-        Optional<EventEntity> byEventId = eventRepository.findByEventId(eventId);
+        Optional<EventEntity> byEventId = eventRepository.findByEventId(id);
 
         //then
         assertThat(byEventId.get().getEventName()).isEqualTo(newEventName);

@@ -2,7 +2,7 @@ package com.example.cultural_event.user.controller;
 
 import com.example.cultural_event.user.dto.UserRequestDto;
 import com.example.cultural_event.user.service.UserService;
-import com.example.cultural_event.notification.model.dto.NotificationResponseDto;
+import com.example.cultural_event.notification.dto.NotificationResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

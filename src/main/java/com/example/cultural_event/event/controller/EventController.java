@@ -4,6 +4,7 @@ import com.example.cultural_event.event.model.dto.EventRequestDto;
 import com.example.cultural_event.event.model.dto.EventResponseDto;
 import com.example.cultural_event.event.model.service.eventService.EventService;
 import com.example.cultural_event.subscription.service.SubscriptionServiceImpl;
+import com.example.cultural_event.user.dto.UserIdRequestDto;
 import com.example.cultural_event.user.dto.UserRequestDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -55,7 +56,7 @@ public class EventController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/{event_id}/subscribe")
-    public void addSubscription(@PathVariable("event_id") UUID eventId, @RequestBody UserRequestDto userRequestDto){
-        subscriptionService.addSubscriptionForEvent(eventId, userRequestDto.getTechnicalId());
+    public void addSubscription(@PathVariable("event_id") UUID eventId, @RequestBody UserIdRequestDto userIdRequestDto){
+        subscriptionService.addSubscriptionForEvent(eventId, userIdRequestDto.getTechnicalId());
     }
 }

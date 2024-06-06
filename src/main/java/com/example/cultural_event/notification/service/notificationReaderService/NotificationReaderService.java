@@ -1,6 +1,6 @@
-package com.example.cultural_event.notification.model.service.notificationReaderService;
+package com.example.cultural_event.notification.service.notificationReaderService;
 
-import com.example.cultural_event.notification.model.dto.NotificationResponseDto;
+import com.example.cultural_event.notification.dto.NotificationResponseDto;
 
 import java.util.List;
 import java.util.UUID;
