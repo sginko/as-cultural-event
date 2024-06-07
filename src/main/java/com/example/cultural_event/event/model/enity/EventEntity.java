@@ -1,6 +1,5 @@
 package com.example.cultural_event.event.model.enity;
 
-import com.example.cultural_event.subscription.entity.SubscriptionEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -11,7 +10,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -38,9 +36,6 @@ public class EventEntity {
 
     @NotNull(message = "The Date-Time field cannot be empty")
     private LocalDateTime dateTimeEvent;
-
-    @OneToMany (mappedBy = "events", cascade = CascadeType.REMOVE)
-    private List<SubscriptionEntity> subscriptionEntity;
 
     public EventEntity(String eventName, String city, LocalDateTime dateTimeEvent) {
         this.eventId = UUID.randomUUID();

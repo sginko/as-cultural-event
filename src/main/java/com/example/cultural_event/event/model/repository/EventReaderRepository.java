@@ -13,4 +13,6 @@ public interface EventReaderRepository extends JpaRepository<EventEntity, Long> 
     Optional<EventEntity> findByEventId(UUID eventId);
 
     List<EventEntity> findAllEventsByDateTimeEvent(LocalDateTime dateTimeEvent);
+
+    List<EventEntity> findByCity(String city);
 }
