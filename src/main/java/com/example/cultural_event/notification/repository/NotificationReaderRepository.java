@@ -13,6 +13,7 @@ public interface NotificationReaderRepository extends JpaRepository<Notification
 
     @Query("SELECT n FROM NotificationEntity n WHERE LOWER(n.city) = (SELECT LOWER(a.city) FROM UserEntity a where a.technicalId=:technicalId)")
     List<NotificationEntity> getAllNotificationsForAccount(UUID technicalId);
+
     @Query("SELECT n FROM NotificationEntity n " +
             "JOIN EventEntity e ON n.eventTechnicalIg = e.eventId " +
             "JOIN SubscriptionEntity s ON e.id = s.events.id")

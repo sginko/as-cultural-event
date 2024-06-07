@@ -1,13 +1,13 @@
 package com.example.cultural_event.notification.service;
 
-import com.example.cultural_event.notification.service.notificationService.NotificationListener;
-import com.example.cultural_event.user.entity.UserEntity;
-import com.example.cultural_event.user.repository.UserRepository;
 import com.example.cultural_event.event.model.enity.EventEntity;
 import com.example.cultural_event.event.model.repository.EventRepository;
 import com.example.cultural_event.notification.enity.NotificationEntity;
 import com.example.cultural_event.notification.repository.NotificationRepository;
+import com.example.cultural_event.notification.service.notificationService.NotificationListener;
 import com.example.cultural_event.notification.service.notificationService.NotificationServiceImpl;
+import com.example.cultural_event.user.entity.UserEntity;
+import com.example.cultural_event.user.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

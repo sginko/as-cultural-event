@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface SubscriptionReaderService {
+
     List<SubscriptionEntity> findByEvent(EventEntity event);
 
     List<UserEntity> findAllUsersByEvent(UUID eventId);

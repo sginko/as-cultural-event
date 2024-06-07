@@ -58,7 +58,7 @@ class EventServiceTest {
         String eventName = "Test Event Name";
         String city = "City";
         LocalDateTime dateTimeEvent = LocalDateTime.now();
-        EventRequestDto eventRequestDto = new EventRequestDto( eventName, city, dateTimeEvent);
+        EventRequestDto eventRequestDto = new EventRequestDto(eventName, city, dateTimeEvent);
         eventService.addEvent(eventRequestDto);
 
         //when
@@ -145,7 +145,7 @@ class EventServiceTest {
         String city = "City";
         LocalDateTime dateTimeEvent = LocalDateTime.now();
 
-        EventRequestDto eventRequestDto = new EventRequestDto( eventName, city, dateTimeEvent);
+        EventRequestDto eventRequestDto = new EventRequestDto(eventName, city, dateTimeEvent);
         eventService.addEvent(eventRequestDto);
         List<EventResponseDto> allEvents = eventService.findAllEvents();
         UUID id = allEvents.get(0).getEventId();

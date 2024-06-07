@@ -42,7 +42,6 @@ class SubscriptionServiceTest {
         subscriptionRepository.deleteAll();
         userRepository.deleteAll();
         eventRepository.deleteAll();
-
     }
 
     @Test
@@ -60,9 +59,7 @@ class SubscriptionServiceTest {
         LocalDateTime dateTimeEvent = LocalDateTime.now();
         EventRequestDto event = new EventRequestDto(eventName, eventCity, dateTimeEvent);
         eventService.addEvent(event);
-
         UUID technicalEventId = eventRepository.findAll().get(0).getEventId();
-
 
         //when
         subscriptionService.addSubscriptionForEvent(technicalEventId, technicalUserId);
@@ -70,5 +67,4 @@ class SubscriptionServiceTest {
         //then
         assertThat(subscriptionRepository.findAll().size()).isEqualTo(1);
     }
-
 }

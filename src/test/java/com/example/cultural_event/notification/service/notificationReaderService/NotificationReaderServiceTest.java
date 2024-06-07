@@ -4,10 +4,8 @@ import com.example.cultural_event.event.model.dto.EventRequestDto;
 import com.example.cultural_event.event.model.repository.EventRepository;
 import com.example.cultural_event.event.model.service.eventService.EventService;
 import com.example.cultural_event.notification.dto.NotificationResponseDto;
-import com.example.cultural_event.subscription.entity.SubscriptionEntity;
 import com.example.cultural_event.subscription.repository.SubscriptionRepository;
 import com.example.cultural_event.subscription.service.SubscriptionService;
-import com.example.cultural_event.user.dto.UserIdRequestDto;
 import com.example.cultural_event.user.dto.UserRequestDto;
 import com.example.cultural_event.user.repository.UserRepository;
 import com.example.cultural_event.user.service.UserService;
@@ -19,24 +17,33 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+
 import static org.assertj.core.api.Assertions.assertThat;
+
 @SpringBootTest
 class NotificationReaderServiceTest {
     private final String CORRECT_NAME = "Flo69";
     private final String CORRECT_EMAIL = "Destin.Smith@yahoo.com";
     private final String CITY = "South Luthermouth";
+
     @Autowired
     private EventService eventService;
+
     @Autowired
     private EventRepository eventRepository;
+
     @Autowired
     private SubscriptionService subscriptionService;
+
     @Autowired
     private SubscriptionRepository subscriptionRepository;
+
     @Autowired
     private UserService userService;
+
     @Autowired
     private UserRepository userRepository;
+
     @BeforeEach
     void tearDown() {
         eventRepository.deleteAll();
@@ -53,7 +60,7 @@ class NotificationReaderServiceTest {
 
         eventService.addEvent(new EventRequestDto("event", "WARSZAWA", dateTimeEvent));
 
-        UserRequestDto userRequestDto = new UserRequestDto(CORRECT_NAME,CITY,CORRECT_EMAIL);
+        UserRequestDto userRequestDto = new UserRequestDto(CORRECT_NAME, CITY, CORRECT_EMAIL);
         userService.addNewUser(userRequestDto);
         UUID technicalUserId = userRepository.findAll().get(0).getTechnicalId();
 
@@ -66,5 +73,4 @@ class NotificationReaderServiceTest {
         assertThat(allNotificationsForSubscribedEvents.size()).isEqualTo(1);
         assertThat(allNotificationsForSubscribedEvents.get(0).getCity()).isEqualTo(firstCity);
     }
-
 }

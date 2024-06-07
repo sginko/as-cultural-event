@@ -5,7 +5,6 @@ import com.example.cultural_event.event.model.dto.EventResponseDto;
 import com.example.cultural_event.event.model.service.eventService.EventService;
 import com.example.cultural_event.subscription.service.SubscriptionServiceImpl;
 import com.example.cultural_event.user.dto.UserIdRequestDto;
-import com.example.cultural_event.user.dto.UserRequestDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

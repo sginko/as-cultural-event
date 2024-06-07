@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class SubscriptionReaderServiceImpl implements SubscriptionReaderService{
+public class SubscriptionReaderServiceImpl implements SubscriptionReaderService {
     private final SubscriptionReaderRepository subscriptionReaderRepository;
 
     public SubscriptionReaderServiceImpl(SubscriptionReaderRepository subscriptionReaderRepository) {

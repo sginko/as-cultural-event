@@ -39,7 +39,7 @@ public class EventEntity {
     @NotNull(message = "The Date-Time field cannot be empty")
     private LocalDateTime dateTimeEvent;
 
-    @OneToMany (mappedBy = "events", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "events", cascade = CascadeType.REMOVE)
     private List<SubscriptionEntity> subscriptionEntity;
 
     public EventEntity(String eventName, String city, LocalDateTime dateTimeEvent) {
