@@ -3,6 +3,7 @@ package com.example.cultural_event.notification.service.notificationService;
 import com.example.cultural_event.event.model.enity.EventEntity;
 import com.example.cultural_event.notification.enity.NotificationEntity;
 import com.example.cultural_event.notification.repository.NotificationRepository;
+import com.example.cultural_event.notification.service.emailService.EmailService;
 import com.example.cultural_event.subscription.entity.SubscriptionEntity;
 import com.example.cultural_event.user.entity.UserEntity;
 import com.example.cultural_event.user.service.UserReaderService;
@@ -15,10 +16,12 @@ import java.util.List;
 public class NotificationServiceImpl implements NotificationService, NotificationListener {
     private final UserReaderService userReaderService;
     private final NotificationRepository notificationRepository;
+    private final EmailService emailService;
 
-    public NotificationServiceImpl(UserReaderService userReaderService, NotificationRepository notificationRepository) {
+    public NotificationServiceImpl(UserReaderService userReaderService, NotificationRepository notificationRepository, EmailService emailService) {
         this.userReaderService = userReaderService;
         this.notificationRepository = notificationRepository;
+        this.emailService = emailService;
     }
 
     @Override
@@ -35,6 +38,10 @@ public class NotificationServiceImpl implements NotificationService, Notificatio
             NotificationEntity notificationEntity = new NotificationEntity(event.getEventId(), "Reminder: " + event.getEventName() + " starts in an hour in " + event.getCity(), event.getCity());
             notificationRepository.save(notificationEntity);
             user.receiveNotification(event.getEventName(), "starts in an hour");
+
+            String email = subscription.getUser().getEmail();
+            String content = notificationEntity.getNotification();
+            emailService.sendEmail(email, content);
         }
     }
 
