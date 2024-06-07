@@ -60,6 +60,7 @@ public class EventServiceImpl implements EventService {
                 .orElseThrow(() -> new EventException("Event for id: " + eventId + " not found"));
         List<UserEntity> allUsersByEvent = subscriptionReaderService.findAllUsersByEvent(eventId);
         notificationListener.notificationAboutDeletionEvent(event, allUsersByEvent);
+//        notificationListener.notificationAboutDeletionEvent(event, allUsersByEvent);
         eventRepository.deleteByEventId(event.getEventId());
     }
 

@@ -46,11 +46,24 @@ public class NotificationServiceImpl implements NotificationService, Notificatio
     }
 
     @Override
+    public void sendNotificationsAboutDeletingEvent(EventEntity event, List<SubscriptionEntity> subscriptions) {
+        for (SubscriptionEntity subscription : subscriptions) {
+            UserEntity user = subscription.getUser();
+            NotificationEntity notificationEntity = new NotificationEntity(event.getEventId(), "Notification about canceled " + event.getEventName(), event.getCity());
+            notificationRepository.save(notificationEntity);
+            user.receiveNotification(event.getEventName(), " has been canceled");
+
+            String email = subscription.getUser().getEmail();
+            String content = notificationEntity.getNotification();
+            emailService.sendEmail(email, content);
+        }
+    }
+
+    @Override
     @Transactional
     public void notificationAboutCreationEvent(EventEntity event) {
         NotificationEntity notificationEntity = new NotificationEntity(event.getEventId(), "Notification about " + event.getEventName(), event.getCity());
         notificationRepository.save(notificationEntity);
-
         List<UserEntity> users = userReaderService.findByCity(event.getCity());
         sendNotificationsForAllUsersAboutCreatingEvent(event, users, " has been created");
     }
@@ -59,7 +72,6 @@ public class NotificationServiceImpl implements NotificationService, Notificatio
     public void notificationAboutDeletionEvent(EventEntity event, List<UserEntity> users) {
         NotificationEntity notificationEntity = new NotificationEntity(event.getEventId(), "Notification about deletion " + event.getEventName(), event.getCity());
         notificationRepository.save(notificationEntity);
-
         sendNotificationsForAllUsersAboutCreatingEvent(event, users, " has been deleted");
     }
 }
