@@ -8,9 +8,9 @@ import java.util.List;
 
 public interface NotificationService {
 
-    void sendNotificationsForAllUsersAboutCreatingEvent(EventEntity event, List<UserEntity> users, String content);
+    void sendNotificationsForAllUsersAboutEvent(EventEntity event, List<UserEntity> users, String content);
 
     void sendNotificationsAboutUpcomingEvent(EventEntity event, List<SubscriptionEntity> subscriptions);
 
-    void sendNotificationsAboutDeletingEvent(EventEntity event, List<SubscriptionEntity> subscriptions);
+    void sendNotificationsAboutCanceledEvent(EventEntity event, List<SubscriptionEntity> subscriptions);
 }

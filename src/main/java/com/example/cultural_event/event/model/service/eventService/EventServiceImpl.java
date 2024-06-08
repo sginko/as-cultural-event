@@ -7,8 +7,6 @@ import com.example.cultural_event.event.model.enity.EventEntity;
 import com.example.cultural_event.event.model.mapper.EventMapper;
 import com.example.cultural_event.event.model.repository.EventRepository;
 import com.example.cultural_event.notification.service.notificationService.NotificationListener;
-import com.example.cultural_event.subscription.service.SubscriptionReaderService;
-import com.example.cultural_event.user.entity.UserEntity;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +18,11 @@ public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
     private final EventMapper eventMapper;
     private final NotificationListener notificationListener;
-    private final SubscriptionReaderService subscriptionReaderService;
 
-    public EventServiceImpl(EventRepository eventRepository, EventMapper eventMapper, NotificationListener notificationListener, SubscriptionReaderService subscriptionReaderService) {
+    public EventServiceImpl(EventRepository eventRepository, EventMapper eventMapper, NotificationListener notificationListener) {
         this.eventRepository = eventRepository;
         this.eventMapper = eventMapper;
         this.notificationListener = notificationListener;
-        this.subscriptionReaderService = subscriptionReaderService;
     }
 
     @Override
@@ -58,9 +54,7 @@ public class EventServiceImpl implements EventService {
     public void deleteByEventId(UUID eventId) {
         EventEntity event = eventRepository.findByEventId(eventId)
                 .orElseThrow(() -> new EventException("Event for id: " + eventId + " not found"));
-        List<UserEntity> allUsersByEvent = subscriptionReaderService.findAllUsersByEvent(eventId);
-        notificationListener.notificationAboutDeletionEvent(event, allUsersByEvent);
-//        notificationListener.notificationAboutDeletionEvent(event, allUsersByEvent);
+        notificationListener.notificationAboutDeletionEvent(event);
         eventRepository.deleteByEventId(event.getEventId());
     }
 
