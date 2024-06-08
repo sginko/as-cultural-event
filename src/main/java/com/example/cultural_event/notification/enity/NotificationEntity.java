@@ -18,13 +18,12 @@ public class NotificationEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private UUID eventTechnicalIg;
-
+    private UUID eventTechnicalId;
     private String notification;
     private String city;
 
-    public NotificationEntity(UUID eventTechnicalIg, String notification, String city) {
-        this.eventTechnicalIg = eventTechnicalIg;
+    public NotificationEntity(UUID eventTechnicalId, String notification, String city) {
+        this.eventTechnicalId = eventTechnicalId;
         this.notification = notification;
         this.city = city;
     }

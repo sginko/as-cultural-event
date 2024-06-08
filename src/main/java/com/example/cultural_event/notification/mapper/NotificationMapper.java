@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class NotificationMapper {
     public NotificationResponseDto fromEntity(NotificationEntity notificationEntity) {
-        return new NotificationResponseDto(notificationEntity.getEventTechnicalIg(), notificationEntity.getNotification(), notificationEntity.getCity());
+        return new NotificationResponseDto(notificationEntity.getEventTechnicalId(), notificationEntity.getNotification(), notificationEntity.getCity());
     }
 }

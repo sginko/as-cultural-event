@@ -12,12 +12,11 @@ public class EmailServiceImpl implements EmailService{
         this.emailSender = emailSender;
     }
 
-    //    public void sendEmail(String mail, String subject, String content) {
-    public void sendEmail(String mail, String content) {
+        public void sendEmail(String mail, String subject, String content) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("devbuzzmail@gmail.com");
+        message.setFrom("no-reply@cultural-event.com");
         message.setTo(mail);
-//        message.setSubject(subject);
+        message.setSubject(subject);
         message.setText(content);
         emailSender.send(message);
     }
