@@ -13,7 +13,9 @@ public interface NotificationService {
 
     void sendNotificationsAboutUpcomingEvent(EventEntity event, List<SubscriptionEntity> subscriptions);
 
-    void sendNotificationsAboutCanceledEvent(EventEntity event, List<SubscriptionEntity> subscriptions);
+    void sendNotificationsAboutCancelledEvent(EventEntity event, List<SubscriptionEntity> subscriptions);
+
+    void sendNotificationsAboutUpdatedEvent(EventEntity event, List<SubscriptionEntity> subscriptions);
 
     List<NotificationEntity> getAllExpiredNotifications(Integer numberMinutesSavingNotification);
 
