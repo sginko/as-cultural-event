@@ -1,6 +1,7 @@
 package com.example.cultural_event.event.model.enity;
 
 import com.example.cultural_event.subscription.entity.SubscriptionEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Setter
 @Entity
@@ -40,6 +41,7 @@ public class EventEntity {
     private LocalDateTime dateTimeEvent;
 
     @OneToMany(mappedBy = "events", cascade = CascadeType.REMOVE)
+    @JsonIgnore
     private List<SubscriptionEntity> subscriptionEntity;
 
     public EventEntity(String eventName, String city, LocalDateTime dateTimeEvent) {

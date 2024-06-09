@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
 @Table(name = "users")
