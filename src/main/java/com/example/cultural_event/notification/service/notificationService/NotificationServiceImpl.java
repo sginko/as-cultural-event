@@ -11,7 +11,9 @@ import com.example.cultural_event.user.service.UserReaderService;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+
 
 @Service
 public class NotificationServiceImpl implements NotificationService, NotificationListener {
@@ -80,5 +82,17 @@ public class NotificationServiceImpl implements NotificationService, Notificatio
 
         List<SubscriptionEntity> subscriptions = subscriptionReaderService.findByEvent(event);
         sendNotificationsAboutCanceledEvent(event, subscriptions);
+    }
+
+    @Override
+    public List<NotificationEntity> getAllExpiredNotifications(Integer numberMinutesSavingNotification) {
+        LocalDateTime timeThreshold = LocalDateTime.now().minusMinutes(numberMinutesSavingNotification);
+        List<NotificationEntity> allExpiredNotifications = notificationRepository.getAllExpiredNotifications(timeThreshold);
+        return allExpiredNotifications;
+    }
+
+    @Override
+    public void deleteAllExpiredNotifications(List<NotificationEntity> expiredNotifications) {
+        notificationRepository.deleteAll(expiredNotifications);
     }
 }
