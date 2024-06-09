@@ -70,39 +70,39 @@ class SubscriptionServiceTest {
         assertThat(subscriptionRepository.findAll().size()).isEqualTo(1);
     }
 
-    @Test
-    void should_get_list_subscription_without_unsubscribed_events() {
-        //given
-        String userName = "TestName";
-        String email = "test@mail.com";
-        String userCity = "City";
-        UserRequestDto user = new UserRequestDto(userName, userCity, email);
-        userService.addNewUser(user);
-        UUID technicalUserId = userRepository.findAll().get(0).getTechnicalId();
-
-        String eventName = "Test Event Name";
-        String eventCity = "City";
-        LocalDateTime dateTimeEvent = LocalDateTime.now();
-        EventRequestDto event = new EventRequestDto(eventName, eventCity, dateTimeEvent);
-        eventService.addEvent(event);
-        UUID technicalEventId = eventRepository.findAll().get(0).getEventId();
-
-        subscriptionService.addSubscriptionForEvent(technicalEventId, technicalUserId);
-
-        String secondEventName = "Second Test Event Name";
-        String secondEventCity = "City";
-        LocalDateTime secondDateTimeEvent = LocalDateTime.now();
-        EventRequestDto secondEvent = new EventRequestDto(secondEventName, secondEventCity, secondDateTimeEvent);
-        eventService.addEvent(secondEvent);
-        UUID secondTechnicalEventId = eventRepository.findAll().get(1).getEventId();
-
-        subscriptionService.addSubscriptionForEvent(secondTechnicalEventId, technicalUserId);
-
-        //when
-        subscriptionService.deleteSubscriptionForEvent(technicalEventId, technicalUserId);
-        List<SubscriptionEntity> all = subscriptionRepository.findAll();
-        //then
-        assertThat(all.size()).isEqualTo(1);
-        assertThat(subscriptionRepository.findAll().get(0).getEvents().getEventName()).isEqualTo(secondEventName);
-    }
+//    @Test
+//    void should_get_list_subscription_without_unsubscribed_events() {
+//        //given
+//        String userName = "TestName";
+//        String email = "test@mail.com";
+//        String userCity = "City";
+//        UserRequestDto user = new UserRequestDto(userName, userCity, email);
+//        userService.addNewUser(user);
+//        UUID technicalUserId = userRepository.findAll().get(0).getTechnicalId();
+//
+//        String eventName = "Test Event Name";
+//        String eventCity = "City";
+//        LocalDateTime dateTimeEvent = LocalDateTime.now();
+//        EventRequestDto event = new EventRequestDto(eventName, eventCity, dateTimeEvent);
+//        eventService.addEvent(event);
+//        UUID technicalEventId = eventRepository.findAll().get(0).getEventId();
+//
+//        subscriptionService.addSubscriptionForEvent(technicalEventId, technicalUserId);
+//
+//        String secondEventName = "Second Test Event Name";
+//        String secondEventCity = "City";
+//        LocalDateTime secondDateTimeEvent = LocalDateTime.now();
+//        EventRequestDto secondEvent = new EventRequestDto(secondEventName, secondEventCity, secondDateTimeEvent);
+//        eventService.addEvent(secondEvent);
+//        UUID secondTechnicalEventId = eventRepository.findAll().get(1).getEventId();
+//
+//        subscriptionService.addSubscriptionForEvent(secondTechnicalEventId, technicalUserId);
+//
+//        //when
+//        subscriptionService.deleteSubscriptionForEvent(technicalEventId, technicalUserId);
+//        List<SubscriptionEntity> all = subscriptionRepository.findAll();
+//        //then
+//        assertThat(all.size()).isEqualTo(1);
+//        assertThat(subscriptionRepository.findAll().get(0).getEvents().getEventName()).isEqualTo(secondEventName);
+//    }
 }

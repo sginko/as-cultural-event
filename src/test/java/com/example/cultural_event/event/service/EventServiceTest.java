@@ -173,6 +173,7 @@ class EventServiceTest {
 //
 //        EventRequestDto updatedEventRequestDto = new EventRequestDto(newEventName, city, dateTimeEvent);
 //
+//
 //        //when
 //        eventService.updateEvent(id, updatedEventRequestDto);
 //        //and
