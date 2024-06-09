@@ -15,11 +15,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 class NotificationServiceTest {
+    private final Integer NUMBER_MINUTES_SAVING_NOTIFICATION = 60;
     private final String NAME_EVENT = "HOLIDAY";
     private final String CITY = "BERLIN";
     private final LocalDateTime DATE_OF_EVENT = LocalDateTime.now().plusDays(10);
@@ -82,6 +84,28 @@ class NotificationServiceTest {
         assertThat(all.get(0).getNotification().contains(CITY));
     }
 
+    @Test
+    void should_find_all_notification_older_then_X_minutes() {
+        //given
+        EventEntity event = prepareEvent(NAME_EVENT, CITY, DATE_OF_EVENT);
+        eventRepository.save(event);
+
+        UUID eventId = event.getEventId();
+
+        NotificationEntity notificationBefore = new NotificationEntity(eventId, "notification before 2 hour", CITY);
+        notificationBefore.setTimeCreatingNotification(LocalDateTime.now().minusHours(2));
+        notificationRepository.save(notificationBefore);
+
+        NotificationEntity notificationNow = new NotificationEntity(eventId, "notification just now", CITY);
+        notificationRepository.save(notificationNow);
+
+        //when
+        List<NotificationEntity> expiredNotifications = notificationService.getAllExpiredNotifications(NUMBER_MINUTES_SAVING_NOTIFICATION);
+
+        //then
+        assertThat(expiredNotifications.size()).isEqualTo(1);
+    }
+
     private UserEntity prepareUser(String nameAccount, String city, String email) {
         return new UserEntity(nameAccount, city, email);
     }
@@ -89,4 +113,5 @@ class NotificationServiceTest {
     private EventEntity prepareEvent(String nameEvent, String city, LocalDateTime dateOfEvent) {
         return new EventEntity(nameEvent, city, dateOfEvent);
     }
+
 }
