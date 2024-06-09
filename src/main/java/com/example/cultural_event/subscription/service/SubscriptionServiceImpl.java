@@ -37,4 +37,14 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         SubscriptionEntity subscriptionEntity = new SubscriptionEntity(userEntity, eventEntity);
         subscriptionRepository.save(subscriptionEntity);
     }
+
+    public void deleteSubscriptionForEvent(UUID eventId, UUID technicalId) {
+        SubscriptionEntity subscriptionByTechnicalIdaAndEventId = subscriptionRepository.getSubscriptionByTechnicalIdaAndEventId(technicalId, eventId);
+        try {
+            subscriptionRepository.delete(subscriptionByTechnicalIdaAndEventId);
+        } catch (RuntimeException e) {
+            throw new EventException("Subscription not found");
+        }
+    }
 }
+

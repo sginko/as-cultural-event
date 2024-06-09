@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
@@ -21,10 +22,12 @@ public class NotificationEntity {
     private UUID eventTechnicalId;
     private String notification;
     private String city;
+    private LocalDateTime timeCreatingNotification;
 
     public NotificationEntity(UUID eventTechnicalId, String notification, String city) {
         this.eventTechnicalId = eventTechnicalId;
         this.notification = notification;
         this.city = city;
+        this.timeCreatingNotification = LocalDateTime.now();
     }
 }

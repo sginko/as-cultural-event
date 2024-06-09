@@ -5,4 +5,7 @@ import java.util.UUID;
 public interface SubscriptionService {
 
     void addSubscriptionForEvent(UUID eventId, UUID accountId);
+
+    public void deleteSubscriptionForEvent(UUID eventId, UUID technicalId);
+
 }

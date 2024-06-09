@@ -58,4 +58,10 @@ public class EventController {
     public void addSubscription(@PathVariable("event_id") UUID eventId, @RequestBody UserIdRequestDto userIdRequestDto){
         subscriptionService.addSubscriptionForEvent(eventId, userIdRequestDto.getTechnicalId());
     }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/{event_id}/unsubscribe")
+    public void deleteSubscription(@PathVariable("event_id") UUID eventId, @RequestBody UserIdRequestDto userIdRequestDto){
+        subscriptionService.deleteSubscriptionForEvent(eventId, userIdRequestDto.getTechnicalId());
+    }
 }

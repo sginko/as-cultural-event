@@ -1,6 +1,7 @@
 package com.example.cultural_event.notification.service.notificationService;
 
 import com.example.cultural_event.event.model.enity.EventEntity;
+import com.example.cultural_event.notification.enity.NotificationEntity;
 import com.example.cultural_event.subscription.entity.SubscriptionEntity;
 import com.example.cultural_event.user.entity.UserEntity;
 
@@ -13,4 +14,8 @@ public interface NotificationService {
     void sendNotificationsAboutUpcomingEvent(EventEntity event, List<SubscriptionEntity> subscriptions);
 
     void sendNotificationsAboutCanceledEvent(EventEntity event, List<SubscriptionEntity> subscriptions);
+
+    List<NotificationEntity> getAllExpiredNotifications(Integer numberMinutesSavingNotification);
+
+    void deleteAllExpiredNotifications(List<NotificationEntity> expiredNotifications);
 }
