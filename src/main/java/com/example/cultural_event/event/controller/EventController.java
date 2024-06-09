@@ -55,6 +55,12 @@ public class EventController {
     }
 
     @ResponseStatus(HttpStatus.OK)
+    @PostMapping("/{event_id}/unsubscribe")
+    public void deleteSubscription(@PathVariable("event_id") UUID eventId, @RequestBody UserIdRequestDto userIdRequestDto){
+        subscriptionService.deleteSubscriptionForEvent(eventId, userIdRequestDto.getTechnicalId());
+    }
+
+    @ResponseStatus(HttpStatus.OK)
     @PatchMapping("/update/{event_id}")
     public void updateByEventId(@PathVariable("event_id") UUID eventId, @RequestBody JsonPatch patch) {
         eventService.updateEvent(eventId, patch);
