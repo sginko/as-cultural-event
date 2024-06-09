@@ -106,6 +106,30 @@ class NotificationServiceTest {
         assertThat(expiredNotifications.size()).isEqualTo(1);
     }
 
+    @Test
+    void should_delete_all_notification_older_then_X_minutes() {
+        //given
+        EventEntity event = prepareEvent(NAME_EVENT, CITY, DATE_OF_EVENT);
+        eventRepository.save(event);
+
+        UUID eventId = event.getEventId();
+
+        NotificationEntity notificationBefore = new NotificationEntity(eventId, "notification before 2 hour", CITY);
+        notificationBefore.setTimeCreatingNotification(LocalDateTime.now().minusHours(2));
+        notificationRepository.save(notificationBefore);
+
+        NotificationEntity notificationNow = new NotificationEntity(eventId, "notification just now", CITY);
+        notificationRepository.save(notificationNow);
+
+        //when
+        List<NotificationEntity> expiredNotifications = notificationService.getAllExpiredNotifications(NUMBER_MINUTES_SAVING_NOTIFICATION);
+        notificationService.deleteAllExpiredNotifications(expiredNotifications);
+
+        //then
+        assertThat(notificationRepository.findAll().size()).isEqualTo(1);
+        assertThat(expiredNotifications.size()).isEqualTo(1);
+    }
+
     private UserEntity prepareUser(String nameAccount, String city, String email) {
         return new UserEntity(nameAccount, city, email);
     }
