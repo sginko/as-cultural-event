@@ -52,9 +52,21 @@ public class NotificationServiceImpl implements NotificationService, Notificatio
     }
 
     @Override
-    public void sendNotificationsAboutCanceledEvent(EventEntity event, List<SubscriptionEntity> subscriptions) {
+    public void sendNotificationsAboutCancelledEvent(EventEntity event, List<SubscriptionEntity> subscriptions) {
         for (SubscriptionEntity subscription : subscriptions) {
             NotificationEntity notificationEntity = new NotificationEntity(event.getEventId(), "Attention: " + event.getEventName() + " has cancelled in " + event.getCity(), event.getCity());
+            notificationRepository.save(notificationEntity);
+            String email = subscription.getUser().getEmail();
+            String subject = notificationEntity.getNotification();
+            String content = notificationEntity.getNotification();
+            emailService.sendEmail(email, subject, content);
+        }
+    }
+
+    @Override
+    public void sendNotificationsAboutUpdatedEvent(EventEntity event, List<SubscriptionEntity> subscriptions) {
+        for (SubscriptionEntity subscription : subscriptions) {
+            NotificationEntity notificationEntity = new NotificationEntity(event.getEventId(), "Attention: " + event.getEventName() + " has updated in " + event.getCity(), event.getCity());
             notificationRepository.save(notificationEntity);
             String email = subscription.getUser().getEmail();
             String subject = notificationEntity.getNotification();
@@ -81,7 +93,18 @@ public class NotificationServiceImpl implements NotificationService, Notificatio
         sendNotificationsForAllUsersAboutEvent(event, users, "has been cancelled");
 
         List<SubscriptionEntity> subscriptions = subscriptionReaderService.findByEvent(event);
-        sendNotificationsAboutCanceledEvent(event, subscriptions);
+        sendNotificationsAboutCancelledEvent(event, subscriptions);
+    }
+
+    @Override
+    public void notificationAboutUpdateEvent(EventEntity event) {
+        NotificationEntity notificationEntity = new NotificationEntity(event.getEventId(), "Notification about " + event.getEventName(), event.getCity());
+        notificationRepository.save(notificationEntity);
+        List<UserEntity> users = userReaderService.findByCity(event.getCity());
+        sendNotificationsForAllUsersAboutEvent(event, users, "has been updated");
+
+        List<SubscriptionEntity> subscriptions = subscriptionReaderService.findByEvent(event);
+        sendNotificationsAboutUpdatedEvent(event, subscriptions);
     }
 
     @Override

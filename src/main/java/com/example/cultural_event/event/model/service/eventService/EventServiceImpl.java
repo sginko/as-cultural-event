@@ -7,6 +7,11 @@ import com.example.cultural_event.event.model.enity.EventEntity;
 import com.example.cultural_event.event.model.mapper.EventMapper;
 import com.example.cultural_event.event.model.repository.EventRepository;
 import com.example.cultural_event.notification.service.notificationService.NotificationListener;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +23,13 @@ public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
     private final EventMapper eventMapper;
     private final NotificationListener notificationListener;
+    private final ObjectMapper objectMapper;
 
-    public EventServiceImpl(EventRepository eventRepository, EventMapper eventMapper, NotificationListener notificationListener) {
+    public EventServiceImpl(EventRepository eventRepository, EventMapper eventMapper, NotificationListener notificationListener, ObjectMapper objectMapper) {
         this.eventRepository = eventRepository;
         this.eventMapper = eventMapper;
         this.notificationListener = notificationListener;
+        this.objectMapper = objectMapper;
     }
 
     @Override
@@ -60,13 +67,17 @@ public class EventServiceImpl implements EventService {
 
     @Override
     @Transactional
-    public void updateEvent(UUID eventId, EventRequestDto eventRequestDto) {
+    public void updateEvent(UUID eventId, JsonPatch patch) {
         EventEntity event = eventRepository.findByEventId(eventId)
                 .orElseThrow(() -> new EventException("Event for id: " + eventId + " not found"));
-
-        event.setEventName(eventRequestDto.getEventName());
-        event.setCity(eventRequestDto.getCity());
-        event.setDateTimeEvent(eventRequestDto.getDateTimeEvent());
+        try {
+            JsonNode jsonNode = objectMapper.convertValue(event, JsonNode.class);
+            JsonNode patched = patch.apply(jsonNode);
+            event = objectMapper.treeToValue(patched, EventEntity.class);
+        } catch (JsonPatchException | JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
         eventRepository.save(event);
+        notificationListener.notificationAboutUpdateEvent(event);
     }
 }

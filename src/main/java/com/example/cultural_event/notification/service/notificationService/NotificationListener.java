@@ -7,4 +7,6 @@ public interface NotificationListener {
     void notificationAboutCreationEvent(EventEntity event);
 
     void notificationAboutDeletionEvent(EventEntity event);
+
+    void notificationAboutUpdateEvent(EventEntity event);
 }

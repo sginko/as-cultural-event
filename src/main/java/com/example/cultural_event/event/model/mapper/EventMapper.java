@@ -17,4 +17,9 @@ public class EventMapper {
         return new EventEntity(eventRequestDto.getEventName(), eventRequestDto.getCity(),
                 eventRequestDto.getDateTimeEvent());
     }
+
+    public EventEntity toEntityFromResponse(EventResponseDto eventResponseDto) {
+        return new EventEntity(eventResponseDto.getEventName(), eventResponseDto.getCity(),
+                eventResponseDto.getDateTimeEvent());
+    }
 }
