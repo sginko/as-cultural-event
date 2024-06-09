@@ -3,8 +3,9 @@ package com.example.cultural_event.notification.service.emailService;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class EmailServiceImpl implements EmailService{
     private final JavaMailSender emailSender;
 

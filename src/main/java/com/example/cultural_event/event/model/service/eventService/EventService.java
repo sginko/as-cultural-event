@@ -2,6 +2,7 @@ package com.example.cultural_event.event.model.service.eventService;
 
 import com.example.cultural_event.event.model.dto.EventRequestDto;
 import com.example.cultural_event.event.model.dto.EventResponseDto;
+import com.github.fge.jsonpatch.JsonPatch;
 
 import java.util.List;
 import java.util.UUID;
@@ -16,5 +17,5 @@ public interface EventService {
 
     void deleteByEventId(UUID eventId);
 
-    void updateEvent(UUID eventId, EventRequestDto eventRequestDto);
+    void updateEvent(UUID eventId, JsonPatch patch);
 }

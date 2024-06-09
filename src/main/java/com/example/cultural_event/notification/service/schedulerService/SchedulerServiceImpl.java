@@ -1,7 +1,9 @@
-package com.example.cultural_event.notification.service.notificationService;
+package com.example.cultural_event.notification.service.schedulerService;
 
 import com.example.cultural_event.event.model.enity.EventEntity;
 import com.example.cultural_event.event.model.service.eventReaderService.EventReaderService;
+import com.example.cultural_event.notification.service.notificationService.NotificationService;
+import com.example.cultural_event.notification.service.notificationService.NotificationServiceImpl;
 import com.example.cultural_event.subscription.entity.SubscriptionEntity;
 import com.example.cultural_event.subscription.service.SubscriptionReaderService;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -11,12 +13,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class SchedulerService {
+public class SchedulerServiceImpl implements SchedulerService{
     private final EventReaderService eventReaderService;
     private final NotificationService notificationService;
     private final SubscriptionReaderService subscriptionReaderService;
 
-    public SchedulerService(EventReaderService eventReaderService, NotificationServiceImpl notificationService, SubscriptionReaderService subscriptionReaderService) {
+    public SchedulerServiceImpl(EventReaderService eventReaderService, NotificationServiceImpl notificationService, SubscriptionReaderService subscriptionReaderService) {
         this.eventReaderService = eventReaderService;
         this.notificationService = notificationService;
         this.subscriptionReaderService = subscriptionReaderService;

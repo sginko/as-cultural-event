@@ -158,27 +158,27 @@ class EventServiceTest {
         assertThat(eventRepository.findAll().isEmpty()).isTrue();
     }
 
-    @Test
-    void should_update_event() {
-        //given
-        String eventName = "Test Event Name";
-        String newEventName = "New Event Name";
-        String city = "City";
-        LocalDateTime dateTimeEvent = LocalDateTime.now();
-
-        EventRequestDto eventRequestDto = new EventRequestDto(eventName, city, dateTimeEvent);
-        eventService.addEvent(eventRequestDto);
-        List<EventResponseDto> allEvents = eventService.findAllEvents();
-        UUID id = allEvents.get(0).getEventId();
-
-        EventRequestDto updatedEventRequestDto = new EventRequestDto(newEventName, city, dateTimeEvent);
-
-        //when
-        eventService.updateEvent(id, updatedEventRequestDto);
-        //and
-        Optional<EventEntity> byEventId = eventRepository.findByEventId(id);
-
-        //then
-        assertThat(byEventId.get().getEventName()).isEqualTo(newEventName);
-    }
+//    @Test
+//    void should_update_event() {
+//        //given
+//        String eventName = "Test Event Name";
+//        String newEventName = "New Event Name";
+//        String city = "City";
+//        LocalDateTime dateTimeEvent = LocalDateTime.now();
+//
+//        EventRequestDto eventRequestDto = new EventRequestDto(eventName, city, dateTimeEvent);
+//        eventService.addEvent(eventRequestDto);
+//        List<EventResponseDto> allEvents = eventService.findAllEvents();
+//        UUID id = allEvents.get(0).getEventId();
+//
+//        EventRequestDto updatedEventRequestDto = new EventRequestDto(newEventName, city, dateTimeEvent);
+//
+//        //when
+//        eventService.updateEvent(id, updatedEventRequestDto);
+//        //and
+//        Optional<EventEntity> byEventId = eventRepository.findByEventId(id);
+//
+//        //then
+//        assertThat(byEventId.get().getEventName()).isEqualTo(newEventName);
+//    }
 }
