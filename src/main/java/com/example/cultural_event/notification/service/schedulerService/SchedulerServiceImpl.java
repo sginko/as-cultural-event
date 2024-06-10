@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
 @Service
 public class SchedulerServiceImpl implements SchedulerService {
     private final Integer NUMBER_MINUTES_SAVING_NOTIFICATION = 1;
@@ -24,6 +25,7 @@ public class SchedulerServiceImpl implements SchedulerService {
         this.notificationService = notificationService;
         this.subscriptionReaderService = subscriptionReaderService;
     }
+
     @Override
     @Scheduled(fixedRate = 60000)
     public void sendEventNotifications() {
@@ -35,11 +37,11 @@ public class SchedulerServiceImpl implements SchedulerService {
             notificationService.sendNotificationsAboutUpcomingEvent(event, subscriptions);
         }
     }
+
     @Override
     @Scheduled(fixedRate = 60000)
     public void deleteNotificationAfterFinishedEvent() {
         List<NotificationEntity> expiredNotifications = notificationService.getAllExpiredNotifications(NUMBER_MINUTES_SAVING_NOTIFICATION);
-        System.out.println(expiredNotifications);
         notificationService.deleteAllExpiredNotifications(expiredNotifications);
     }
 }
