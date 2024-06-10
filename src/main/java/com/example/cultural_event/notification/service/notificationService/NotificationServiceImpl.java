@@ -8,8 +8,10 @@ import com.example.cultural_event.subscription.entity.SubscriptionEntity;
 import com.example.cultural_event.subscription.service.SubscriptionReaderService;
 import com.example.cultural_event.user.entity.UserEntity;
 import com.example.cultural_event.user.service.UserReaderService;
-import jakarta.transaction.Transactional;
+//import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -97,6 +99,7 @@ public class NotificationServiceImpl implements NotificationService, Notificatio
     }
 
     @Override
+    @Transactional(propagation = Propagation.MANDATORY)
     public void notificationAboutUpdateEvent(EventEntity event) {
         NotificationEntity notificationEntity = new NotificationEntity(event.getEventId(), "Notification about " + event.getEventName(), event.getCity());
         notificationRepository.save(notificationEntity);

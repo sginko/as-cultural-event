@@ -73,11 +73,12 @@ public class EventServiceImpl implements EventService {
         try {
             JsonNode jsonNode = objectMapper.convertValue(event, JsonNode.class);
             JsonNode patched = patch.apply(jsonNode);
+            //ввести другой тип объекта, чтоб не работать с энцией
             event = objectMapper.treeToValue(patched, EventEntity.class);
         } catch (JsonPatchException | JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-        eventRepository.save(event);
+        //eventRepository.save(event);
         notificationListener.notificationAboutUpdateEvent(event);
     }
 }
