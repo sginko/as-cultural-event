@@ -22,7 +22,7 @@ public class NotificationServiceImpl implements NotificationService, Notificatio
     }
 
     @Override
-    public void sendNotificationsForAllUsersAboutCreatingEvent(EventEntity event, List<UserEntity> users, String content) {
+    public void sendNotificationsForAllUsersAboutEvent(EventEntity event, List<UserEntity> users, String content) {
         for (UserEntity user : users) {
             user.receiveNotification(event.getEventName(), content);
         }
@@ -45,7 +45,7 @@ public class NotificationServiceImpl implements NotificationService, Notificatio
         notificationRepository.save(notificationEntity);
 
         List<UserEntity> users = userReaderService.findByCity(event.getCity());
-        sendNotificationsForAllUsersAboutCreatingEvent(event, users, " has been created");
+        sendNotificationsForAllUsersAboutEvent(event, users, " has been created");
     }
 
     @Override
@@ -53,6 +53,6 @@ public class NotificationServiceImpl implements NotificationService, Notificatio
         NotificationEntity notificationEntity = new NotificationEntity(event.getEventId(), "Notification about deletion " + event.getEventName(), event.getCity());
         notificationRepository.save(notificationEntity);
 
-        sendNotificationsForAllUsersAboutCreatingEvent(event, users, " has been deleted");
+        sendNotificationsForAllUsersAboutEvent(event, users, " has been deleted");
     }
 }
