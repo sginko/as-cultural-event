@@ -6,12 +6,9 @@ import com.example.cultural_event.event.model.enity.EventEntity;
 import com.example.cultural_event.event.model.mapper.EventMapper;
 import com.example.cultural_event.event.model.repository.EventRepository;
 import com.example.cultural_event.event.model.service.eventService.EventService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.fge.jsonpatch.JsonPatch;
-import com.github.fge.jsonpatch.JsonPatchOperation;
-import com.jayway.jsonpath.JsonPath;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -20,7 +17,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -178,7 +177,6 @@ class EventServiceTest {
         eventService.addEvent(eventRequestDto);
         List<EventResponseDto> allEvents = eventService.findAllEvents();
         UUID id = allEvents.get(0).getEventId();
-
 
         String patchString = "[{ \"op\": \"replace\", \"path\": \"/eventName\", \"value\": \"" + newEventName + "\" }]";
         JsonNode patchNode = objectMapper.readTree(patchString);
