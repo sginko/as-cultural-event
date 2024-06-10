@@ -8,12 +8,13 @@ import com.example.cultural_event.notification.service.notificationService.Notif
 import com.example.cultural_event.subscription.entity.SubscriptionEntity;
 import com.example.cultural_event.subscription.service.SubscriptionReaderService;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
+@Service
 public class SchedulerServiceImpl implements SchedulerService {
-    private final Integer NUMBER_MINUTES_SAVING_NOTIFICATION = 60;
+    private final Integer NUMBER_MINUTES_SAVING_NOTIFICATION = 1;
     private final EventReaderService eventReaderService;
     private final NotificationService notificationService;
     private final SubscriptionReaderService subscriptionReaderService;
@@ -23,7 +24,7 @@ public class SchedulerServiceImpl implements SchedulerService {
         this.notificationService = notificationService;
         this.subscriptionReaderService = subscriptionReaderService;
     }
-
+    @Override
     @Scheduled(fixedRate = 60000)
     public void sendEventNotifications() {
         LocalDateTime oneHourFromNow = LocalDateTime.now().plusHours(1).withSecond(0).withNano(0);
@@ -34,10 +35,11 @@ public class SchedulerServiceImpl implements SchedulerService {
             notificationService.sendNotificationsAboutUpcomingEvent(event, subscriptions);
         }
     }
-
+    @Override
     @Scheduled(fixedRate = 60000)
     public void deleteNotificationAfterFinishedEvent() {
         List<NotificationEntity> expiredNotifications = notificationService.getAllExpiredNotifications(NUMBER_MINUTES_SAVING_NOTIFICATION);
+        System.out.println(expiredNotifications);
         notificationService.deleteAllExpiredNotifications(expiredNotifications);
     }
 }
