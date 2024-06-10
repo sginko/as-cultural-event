@@ -6,16 +6,21 @@ import com.example.cultural_event.event.model.enity.EventEntity;
 import com.example.cultural_event.event.model.mapper.EventMapper;
 import com.example.cultural_event.event.model.repository.EventRepository;
 import com.example.cultural_event.event.model.service.eventService.EventService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.fge.jsonpatch.JsonPatch;
+import com.github.fge.jsonpatch.JsonPatchOperation;
+import com.jayway.jsonpath.JsonPath;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -29,6 +34,9 @@ class EventServiceTest {
 
     @Autowired
     private EventMapper eventMapper;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @BeforeEach
     void tearDown() {
@@ -158,28 +166,31 @@ class EventServiceTest {
         assertThat(eventRepository.findAll().isEmpty()).isTrue();
     }
 
-//    @Test
-//    void should_update_event() {
-//        //given
-//        String eventName = "Test Event Name";
-//        String newEventName = "New Event Name";
-//        String city = "City";
-//        LocalDateTime dateTimeEvent = LocalDateTime.now();
-//
-//        EventRequestDto eventRequestDto = new EventRequestDto(eventName, city, dateTimeEvent);
-//        eventService.addEvent(eventRequestDto);
-//        List<EventResponseDto> allEvents = eventService.findAllEvents();
-//        UUID id = allEvents.get(0).getEventId();
-//
-//        EventRequestDto updatedEventRequestDto = new EventRequestDto(newEventName, city, dateTimeEvent);
-//
-//
-//        //when
-//        eventService.updateEvent(id, updatedEventRequestDto);
-//        //and
-//        Optional<EventEntity> byEventId = eventRepository.findByEventId(id);
-//
-//        //then
-//        assertThat(byEventId.get().getEventName()).isEqualTo(newEventName);
-//    }
+    @Test
+    void should_update_event() throws IOException {
+        //given
+        String eventName = "Test Event Name";
+        String newEventName = "New Event Name";
+        String city = "City";
+        LocalDateTime dateTimeEvent = LocalDateTime.now();
+
+        EventRequestDto eventRequestDto = new EventRequestDto(eventName, city, dateTimeEvent);
+        eventService.addEvent(eventRequestDto);
+        List<EventResponseDto> allEvents = eventService.findAllEvents();
+        UUID id = allEvents.get(0).getEventId();
+
+
+        String patchString = "[{ \"op\": \"replace\", \"path\": \"/eventName\", \"value\": \"" + newEventName + "\" }]";
+        JsonNode patchNode = objectMapper.readTree(patchString);
+        JsonPatch patch = JsonPatch.fromJson(patchNode);
+
+        //when
+        eventService.updateEvent(id, patch);
+
+        //and
+        Optional<EventEntity> byEventId = eventRepository.findByEventId(id);
+
+        //then
+        assertThat(byEventId.get().getEventName()).isEqualTo(newEventName);
+    }
 }

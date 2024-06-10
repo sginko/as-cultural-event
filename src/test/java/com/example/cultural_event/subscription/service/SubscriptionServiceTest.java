@@ -101,6 +101,7 @@ class SubscriptionServiceTest {
         //when
         subscriptionService.deleteSubscriptionForEvent(technicalEventId, technicalUserId);
         List<SubscriptionEntity> all = subscriptionRepository.findAll();
+
         //then
         assertThat(all.size()).isEqualTo(1);
         assertThat(subscriptionRepository.findAll().get(0).getEvents().getEventName()).isEqualTo(secondEventName);
