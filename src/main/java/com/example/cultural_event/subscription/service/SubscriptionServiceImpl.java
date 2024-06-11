@@ -28,7 +28,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
     @Override
     public void addSubscriptionForEvent(UUID eventId, UUID userId) {
-        //добавить проверку
+
+        SubscriptionEntity subscription = subscriptionRepository.findByEventIdUserId(eventId, userId);
+
         EventEntity eventEntity = eventReaderService.findByEventId(eventId)
                 .orElseThrow(() -> new EventException("Event for id: " + eventId + " not found"));
 
