@@ -48,6 +48,8 @@ public class NotificationServiceImpl implements NotificationService, Notificatio
             String subject = notificationEntity.getNotification();
             String content = notificationEntity.getNotification();
             emailService.sendEmail(email, subject, content);
+
+
         }
     }
 
