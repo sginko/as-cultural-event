@@ -1,5 +1,6 @@
 package com.example.cultural_event.event.model.mapper;
 
+import com.example.cultural_event.event.model.dto.EventEditDto;
 import com.example.cultural_event.event.model.dto.EventRequestDto;
 import com.example.cultural_event.event.model.dto.EventResponseDto;
 import com.example.cultural_event.event.model.enity.EventEntity;
@@ -18,8 +19,8 @@ public class EventMapper {
                 eventRequestDto.getDateTimeEvent());
     }
 
-    public EventEntity toEntityFromResponse(EventResponseDto eventResponseDto) {
-        return new EventEntity(eventResponseDto.getEventName(), eventResponseDto.getCity(),
-                eventResponseDto.getDateTimeEvent());
+    public EventEditDto fromEntityToEventEdit(EventEntity entity) {
+        return new EventEditDto(entity.getEventId(), entity.getEventName(), entity.getCity(),
+                entity.getDateTimeEvent());
     }
 }

@@ -43,7 +43,6 @@ public class EventEntity {
     private LocalDateTime dateTimeEvent;
 
     @OneToMany(mappedBy = "events", cascade = CascadeType.REMOVE)
-    @JsonIgnore
     private List<SubscriptionEntity> subscriptionEntity;
 
     public EventEntity(String eventName, String city, LocalDateTime dateTimeEvent) {
