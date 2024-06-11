@@ -96,7 +96,7 @@ public class EventServiceImpl implements EventService {
             updateEventEntity(eventEdited, entity);
 
         } catch (JsonPatchException | JsonProcessingException e) {
-            throw new EventException(" ", e);
+            throw new EventException("Error update event ", e);
         }
         notificationListener.notificationAboutUpdateEvent(entity);
     }
