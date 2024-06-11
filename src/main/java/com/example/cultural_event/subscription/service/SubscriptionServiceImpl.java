@@ -11,6 +11,7 @@ import com.example.cultural_event.subscription.entity.SubscriptionEntity;
 import com.example.cultural_event.subscription.repository.SubscriptionRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -30,6 +31,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
     public void addSubscriptionForEvent(UUID eventId, UUID userId) {
 
         SubscriptionEntity subscription = subscriptionRepository.findByEventIdUserId(eventId, userId);
+        if (subscription != null) {
+            throw new EventException("This subscription is already exist!");
+        }
 
         EventEntity eventEntity = eventReaderService.findByEventId(eventId)
                 .orElseThrow(() -> new EventException("Event for id: " + eventId + " not found"));
