@@ -29,18 +29,6 @@ public class SchedulerServiceImpl implements SchedulerService {
         this.notificationRepository = notificationRepository;
     }
 
-//    @Override
-//    @Scheduled(fixedRate = 60000)
-//    public void sendEventNotifications() {
-//        LocalDateTime oneHourFromNow = LocalDateTime.now().plusHours(1).withSecond(0).withNano(0);
-//        List<EventEntity> upcomingEvents = eventReaderService.findAllByDateTimeEvent(oneHourFromNow);
-//
-//        for (EventEntity event : upcomingEvents) {
-//            List<SubscriptionEntity> subscriptions = subscriptionReaderService.findByEvent(event);
-//            notificationService.sendNotificationsAboutUpcomingEvent(event, subscriptions);
-//        }
-//    }
-
     @Override
     @Scheduled(fixedRate = 60000)
     public void sendEventNotifications() {
@@ -49,12 +37,6 @@ public class SchedulerServiceImpl implements SchedulerService {
 
         for (EventEntity event : upcomingEvents) {
             List<SubscriptionEntity> subscriptions = subscriptionReaderService.findByEvent(event);
-
-            for (SubscriptionEntity subscription : subscriptions) {
-                notificationRepository.
-            }
-
-
             notificationService.sendNotificationsAboutUpcomingEvent(event, subscriptions);
         }
     }
