@@ -43,7 +43,6 @@ public class NotificationServiceImpl implements NotificationService, Notificatio
             NotificationEntity notificationEntity = new NotificationEntity(event.getEventId(), "Reminder: " + event.getEventName() + " starts in an hour in " + event.getCity(), event.getCity());
             notificationRepository.save(notificationEntity);
             user.receiveNotification(event.getEventName(), "starts in an hour");
-
             String email = subscription.getUser().getEmail();
             String subject = notificationEntity.getNotification();
             String content = notificationEntity.getNotification();
@@ -91,7 +90,6 @@ public class NotificationServiceImpl implements NotificationService, Notificatio
         notificationRepository.save(notificationEntity);
         List<UserEntity> users = userReaderService.findByCity(event.getCity());
         sendNotificationsForAllUsersAboutEvent(event, users, "has been cancelled");
-
         List<SubscriptionEntity> subscriptions = subscriptionReaderService.findByEvent(event);
         sendNotificationsAboutCancelledEvent(event, subscriptions);
     }
@@ -102,7 +100,6 @@ public class NotificationServiceImpl implements NotificationService, Notificatio
         notificationRepository.save(notificationEntity);
         List<UserEntity> users = userReaderService.findByCity(event.getCity());
         sendNotificationsForAllUsersAboutEvent(event, users, "has been updated");
-
         List<SubscriptionEntity> subscriptions = subscriptionReaderService.findByEvent(event);
         sendNotificationsAboutUpdatedEvent(event, subscriptions);
     }
