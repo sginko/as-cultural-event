@@ -66,22 +66,6 @@ public class EventServiceImpl implements EventService {
         eventRepository.deleteByEventId(event.getEventId());
     }
 
-//    @Override
-//    @Transactional
-//    public void updateEvent(UUID eventId, JsonPatch patch) {
-//        EventEntity event = eventRepository.findByEventId(eventId)
-//                .orElseThrow(() -> new EventException("Event for id: " + eventId + " not found"));
-//        try {
-//            JsonNode jsonNode = objectMapper.convertValue(event, JsonNode.class);
-//            JsonNode patched = patch.apply(jsonNode);
-//            event = objectMapper.treeToValue(patched, EventEntity.class);
-//        } catch (JsonPatchException | JsonProcessingException e) {
-//            throw new RuntimeException(e);
-//        }
-//        eventRepository.save(event);
-//        notificationListener.notificationAboutUpdateEvent(event);
-//    }
-
     @Override
     @Transactional
     public void updateEvent(UUID eventId, JsonPatch patch) {
@@ -102,24 +86,11 @@ public class EventServiceImpl implements EventService {
     }
 
     private void updateEventEntity(EventEditDto eventEdited, EventEntity entity) {
-//        if (entity.getEventId() == eventEdited.getEventId()) {
-//            entity.setEventId(entity.getEventId());
-//        }
-//        entity.setEventId(eventEdited.getEventId());
 
-//        if (entity.getEventName() == eventEdited.getEventName()) {
-//            entity.setEventId(entity.getEventId());
-//        }
         entity.setEventName(eventEdited.getEventName());
 
-//        if (entity.getCity() == eventEdited.getCity()) {
-//            entity.setEventId(entity.getEventId());
-//        }
         entity.setEventName(eventEdited.getEventName());
 
-//        if (entity.getDateTimeEvent() == eventEdited.getDateTimeEvent()) {
-//            entity.setDateTimeEvent(entity.getDateTimeEvent());
-//        }
         entity.setDateTimeEvent(eventEdited.getDateTimeEvent());
     }
 }
