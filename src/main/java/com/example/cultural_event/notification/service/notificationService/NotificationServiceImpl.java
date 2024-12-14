@@ -36,17 +36,42 @@ public class NotificationServiceImpl implements NotificationService, Notificatio
         }
     }
 
+//    @Override
+//    @Transactional
+//    public void sendNotificationsAboutUpcomingEvent(EventEntity event, List<SubscriptionEntity> subscriptions) {
+//        for (SubscriptionEntity subscription : subscriptions) {
+//            UserEntity user = subscription.getUser();
+//            NotificationEntity notificationEntity = new NotificationEntity(event.getEventId(), "Reminder: " + event.getEventName() + " starts in an hour in " + event.getCity(), event.getCity());
+//            notificationRepository.save(notificationEntity);
+//
+//            user.receiveNotification(event.getEventName(), "starts in an hour");
+//
+//            String email = subscription.getUser().getEmail();
+//            String subject = notificationEntity.getNotification();
+//            String content = notificationEntity.getNotification();
+//            if(!notificationEntity.isNotificationSent()){
+//                emailService.sendEmail(email, subject, content);
+//                notificationEntity.setNotificationSent(true);
+//            }
+//        }
+//    }
+
     @Override
+    @Transactional
     public void sendNotificationsAboutUpcomingEvent(EventEntity event, List<SubscriptionEntity> subscriptions) {
         for (SubscriptionEntity subscription : subscriptions) {
             UserEntity user = subscription.getUser();
             NotificationEntity notificationEntity = new NotificationEntity(event.getEventId(), "Reminder: " + event.getEventName() + " starts in an hour in " + event.getCity(), event.getCity());
             notificationRepository.save(notificationEntity);
+
             user.receiveNotification(event.getEventName(), "starts in an hour");
             String email = subscription.getUser().getEmail();
             String subject = notificationEntity.getNotification();
             String content = notificationEntity.getNotification();
-            emailService.sendEmail(email, subject, content);
+            if(!notificationEntity.isNotificationSent()){
+                emailService.sendEmail(email, subject, content);
+                notificationEntity.setNotificationSent(true);
+            }
         }
     }
 

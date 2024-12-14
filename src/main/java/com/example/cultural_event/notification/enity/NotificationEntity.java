@@ -23,11 +23,13 @@ public class NotificationEntity {
     private String notification;
     private String city;
     private LocalDateTime timeCreatingNotification;
+    private boolean notificationSent;
 
     public NotificationEntity(UUID eventTechnicalId, String notification, String city) {
         this.eventTechnicalId = eventTechnicalId;
         this.notification = notification;
         this.city = city;
         this.timeCreatingNotification = LocalDateTime.now();
+        this.notificationSent = false;
     }
 }
